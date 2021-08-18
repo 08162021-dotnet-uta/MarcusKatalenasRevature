@@ -1,0 +1,16 @@
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/helloworld
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/helloworld.deps.json
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/helloworld.runtimeconfig.json
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/helloworld.runtimeconfig.dev.json
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/helloworld.dll
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/ref/helloworld.dll
+/home/marcus/revature/marcus_code/week_1/helloworld/bin/Debug/net5.0/helloworld.pdb
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.csproj.AssemblyReference.cache
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.GeneratedMSBuildEditorConfig.editorconfig
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.AssemblyInfoInputs.cache
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.AssemblyInfo.cs
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.csproj.CoreCompileInputs.cache
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.dll
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/ref/helloworld.dll
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.pdb
+/home/marcus/revature/marcus_code/week_1/helloworld/obj/Debug/net5.0/helloworld.genruntimeconfig.cache
