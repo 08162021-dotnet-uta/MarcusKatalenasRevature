@@ -9,13 +9,12 @@ namespace Calculator
       Console.WriteLine("Hello World!");
 
       //input stuff in C#
-      var input1 = int.Parse(Console.ReadLine()); //type inference
-      var input2 = int.Parse(Console.ReadLine());
+      var inputs = Input();
 
-      var result1 = Add(input1, input2);
-      var result2 = Subtract(input1, input2);
-      var result3 = mult(input1, input2);
-      var result4 = divide(input1, input2);
+      var result1 = Add(inputs[0], inputs[1]);
+      var result2 = Subtract(inputs[0], inputs[1]);
+      var result3 = mult(inputs[0], inputs[1]);
+      var result4 = divide(inputs[0], inputs[1]);
 
       Print(result1, result2, result3, result4);
     }
@@ -45,6 +44,27 @@ namespace Calculator
       {
         Console.WriteLine(item);
       }
+    }
+    static int[] Input()
+    {
+      //input stuff
+
+      try
+      {
+        var input1 = int.Parse(Console.ReadLine()); //type inference
+        var input2 = int.Parse(Console.ReadLine());
+        return new int[] { input1, input2 };
+      }
+      catch (Exception e)
+      {
+        throw e; //points to the origin cause of the error
+        //throw new Exception("hue"); // generates an entire new error
+      }
+      finally
+      {
+
+      }
+
     }
   }
 }

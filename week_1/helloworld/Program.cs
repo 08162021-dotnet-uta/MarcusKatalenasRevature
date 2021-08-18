@@ -71,6 +71,11 @@ namespace helloworld
       Environment.Exit(0);
 
     }
+
+    static void Input()
+    {
+
+    }
   }
 
 }
