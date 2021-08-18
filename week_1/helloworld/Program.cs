@@ -24,7 +24,7 @@ namespace helloworld
     {
       Console.WriteLine("The answer is " + result);
     }
-    //build a simple calculator using 6 methods add, mulit, sub, divide, print , 
+    //build a simple calculator using 5 methods add, mulit, sub, divide, print
     static void Main(string[] args)
     {
       int x, y;
