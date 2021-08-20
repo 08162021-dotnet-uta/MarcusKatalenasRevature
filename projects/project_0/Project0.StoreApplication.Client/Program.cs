@@ -63,7 +63,13 @@ namespace Project0.StoreApplication.Client
       var option = int.Parse(Console.ReadLine());
       var product = pr[option - 1];
 
-      Console.WriteLine("You have bought " + product + " from " + store);
+      Console.WriteLine("You have bought " + product.Name + " from " + store.Name);
+
+    }
+    void viewStoreOrders(){
+
+    }
+    void viewCustomerOrders(){
 
     }
   }
