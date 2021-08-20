@@ -19,6 +19,7 @@ namespace Project0.StoreApplication.Client
     void PrintAllStoreLocations()
     {
       var storeRepository = new StoreRepository();
+      
 
       foreach (var store in storeRepository.Stores)
       {
