@@ -15,6 +15,7 @@ namespace Project0.StoreApplication.Client
       Console.WriteLine("Hello");
       p.PrintAllStoreLocations();
       Console.WriteLine(p.selectStore());
+      p.printProducts();
     }
     void PrintAllStoreLocations()
     {
@@ -39,6 +40,14 @@ namespace Project0.StoreApplication.Client
       var store = sr[option];
 
       return store;
+    }
+
+    void printProducts(){
+       var productRepo = new ProductRepository();
+       foreach (var product in productRepo.Products)
+       {
+            Console.WriteLine(product);
+       }
     }
   }
 }
