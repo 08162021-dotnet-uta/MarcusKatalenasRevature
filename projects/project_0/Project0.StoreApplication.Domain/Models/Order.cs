@@ -5,5 +5,6 @@ namespace Project0.StoreApplication.Domain.Models
   {
     public Customer customer { get; set; }
     public Store s { get; set; }
+    
   }
 }
