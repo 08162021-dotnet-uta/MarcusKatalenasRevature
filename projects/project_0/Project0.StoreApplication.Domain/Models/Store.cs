@@ -10,7 +10,7 @@ namespace Project0.StoreApplication.Domain.Models
 
     public override string ToString()
     {
-      return Name;
+      return Name + " " + Location;
     }
 
   }// end of class

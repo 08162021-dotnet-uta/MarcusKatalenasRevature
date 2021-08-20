@@ -14,16 +14,18 @@ namespace Project0.StoreApplication.Client
 
       Console.WriteLine("Hello");
       p.PrintAllStoreLocations();
-      p.selectStore();
+      Console.WriteLine(p.selectStore());
     }
     void PrintAllStoreLocations()
     {
       var storeRepository = new StoreRepository();
+      int storeid = 0;
       
 
       foreach (var store in storeRepository.Stores)
       {
-        Console.WriteLine(store);
+        Console.WriteLine(storeid + " " + store);
+        storeid += 1;
       }
     }
 
