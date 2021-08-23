@@ -8,34 +8,36 @@ namespace Project0.StoreApplication.Storage.Adapters
 
   public class FileAdapter
   {
-    private object stores;
 
-    public List<Store> ReadFile()
+    public List<T> ReadFile<T>(string path) where T : class
     {
-      string path = @"/home/marcus/revature/marcus_code/data/project_0.xml";
+
 
       var file = new StreamReader(path);
 
-      var xml = new XmlSerializer(typeof(List<Store>));
+      var xml = new XmlSerializer(typeof(List<T>));
 
       //Deseiral
-      var stores = xml.Deserialize(file) as List<Store>;
+      var data = xml.Deserialize(file) as List<T>;
 
-      return stores;
+      return data;
 
     }
-    public void WriteFile(List<Store> stores)
+    public void WriteFile<T>(List<T> data, string path) where T : class
     {
-      string path = @"/home/marcus/revature/marcus_code/data/project_0.xml";
 
       var file = new StreamWriter(path);
 
-      var xml = new XmlSerializer(typeof(List<Store>));
+      var xml = new XmlSerializer(typeof(List<T>));
 
-      xml.Serialize(file, stores);
+      xml.Serialize(file, data);
 
       file.Close();
 
+    }
+    public void UseReadFile()
+    {
+      ReadFile<Store>("path");
     }
   }
 }

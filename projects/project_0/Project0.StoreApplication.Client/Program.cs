@@ -9,6 +9,9 @@ namespace Project0.StoreApplication.Client
 {
   class Program
   {
+
+    //Singular instance at runtime 
+    private readonly StoreRepository _storeRepo = StoreRepository.Instance;
     static void Main(string[] args)
     {
 
@@ -18,22 +21,51 @@ namespace Project0.StoreApplication.Client
       var p = new Program();
 
       Console.WriteLine("Hello");
-      p.PrintAllStoreLocations();
 
+
+      //Customer 
+      p.printAllCustomers();
+      var customer = p.SelectCustomer();
+
+      //Stores
+      p.PrintAllStoreLocations();
       var store = p.selectStore();
 
       p.printProducts();
-      p.purchaseProducts(store);
+      p.purchaseProducts(customer, store);
     }
+
+    void printAllCustomers()
+    {
+      var customerRep = new CustomerRepository();
+      int customerid = 1;
+
+      foreach (var customer in customerRep.Customers)
+      {
+        Console.WriteLine(customerid + " " + customer);
+        customerid += 1;
+      }
+    }
+    Customer SelectCustomer()
+    {
+      var cr = new CustomerRepository().Customers;
+
+      Console.WriteLine("Who are you?");
+
+      var option = int.Parse(Console.ReadLine());
+      var customer = cr[option - 1];
+
+      return customer;
+    }
+
     void PrintAllStoreLocations()
     {
 
       Log.Information("Store Output Method");
-      var storeRepository = new StoreRepository();
       int storeid = 1;
 
 
-      foreach (var store in storeRepository.Stores)
+      foreach (var store in _storeRepo.Stores)
       {
         Console.WriteLine(storeid + " " + store);
         storeid += 1;
@@ -43,7 +75,7 @@ namespace Project0.StoreApplication.Client
     Store selectStore()
     {
       Log.Information("In SelctStore Output Method");
-      var sr = new StoreRepository().Stores;
+      var sr = _storeRepo.Stores;
 
       Console.WriteLine("Select a Store ");
 
@@ -64,16 +96,25 @@ namespace Project0.StoreApplication.Client
 
       }
     }
-    void purchaseProducts(Store store)
+    void purchaseProducts(Customer customer, Store store)
     {
 
+      //List products 
       var pr = new ProductRepository().Products;
+
+      //Start a new order
+      Order newOrder = new Order();
 
       Console.WriteLine("Select a product you want to buy");
       var option = int.Parse(Console.ReadLine());
       var product = pr[option - 1];
 
       Console.WriteLine("You have bought " + product.Name + " from " + store.Name);
+
+    }
+
+    void previewProductsPurchased(Order o)
+    {
 
     }
     void viewStoreOrders()

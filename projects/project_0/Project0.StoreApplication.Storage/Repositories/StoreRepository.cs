@@ -10,23 +10,48 @@ namespace Project0.StoreApplication.Storage.Repositories
   {
     public List<Store> Stores { get; }
 
-    public StoreRepository()
+    private const string _path = @"/home/marcus/revature/marcus_code/data/project_0.xml";
+
+    private StoreRepository()
     {
 
       var fileadapt = new FileAdapter();
 
-      if (fileadapt.ReadFile() == null)
-      {
-        fileadapt.WriteFile(new List<Store>()
+      fileadapt.WriteFile<Store>(new List<Store>()
         {
           new GroceryStore(),
           new OnlineStore(),
           new AthleticStore()
-        });
-      }
+        }, _path);
 
-      Stores = fileadapt.ReadFile();
+
+
+      // if (fileadapt.ReadFile<Store>(_path) == null)
+      // {
+      //   fileadapt.WriteFile<Store>(new List<Store>()
+      //   {
+      //     new GroceryStore(),
+      //     new OnlineStore(),
+      //     new AthleticStore()
+      //   }, _path);
+      // }
+      Stores = fileadapt.ReadFile<Store>(_path);
     }
+
+    private static StoreRepository _storeRepo;
+
+    public static StoreRepository Instance
+    {
+      get
+      {
+        if (_storeRepo == null)
+        {
+          _storeRepo = new StoreRepository();
+        }
+        return _storeRepo;
+      }
+    }
+
     public Store GetStore(int index)
     {
       try

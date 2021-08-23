@@ -10,7 +10,7 @@ namespace Project0.StoreApplication.Testing
     public void Test_StoreCollection()
     {
       // arrange = instance of the entity of the entity to test //sut Subject under test
-      var sut = new StoreRepository();
+      var sut = StoreRepository.Instance;
 
       // act = execute sut for data
       var actual = sut.Stores;
@@ -26,7 +26,7 @@ namespace Project0.StoreApplication.Testing
 
     public void Test_GetStore(int i)
     {
-      var sut = new StoreRepository();
+      var sut = StoreRepository.Instance;
 
       var store = sut.GetStore(i);
 
@@ -38,7 +38,7 @@ namespace Project0.StoreApplication.Testing
     [InlineData(-1)]
     public void Test_GetStoreNull(int i)
     {
-      var sut = new StoreRepository();
+      var sut = StoreRepository.Instance;
 
       var store = sut.GetStore(i);
 
