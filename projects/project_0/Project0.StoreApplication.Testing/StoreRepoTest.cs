@@ -18,5 +18,31 @@ namespace Project0.StoreApplication.Testing
       // assert
       Assert.NotNull(actual);
     }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+
+    public void Test_GetStore(int i)
+    {
+      var sut = new StoreRepository();
+
+      var store = sut.GetStore(i);
+
+      Assert.NotNull(store);
+    }
+
+
+    [Theory]
+    [InlineData(-1)]
+    public void Test_GetStoreNull(int i)
+    {
+      var sut = new StoreRepository();
+
+      var store = sut.GetStore(i);
+
+      Assert.Null(store);
+    }
   }
 }
