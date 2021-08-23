@@ -17,24 +17,24 @@ namespace Project0.StoreApplication.Storage.Repositories
 
       var fileadapt = new FileAdapter();
 
-      fileadapt.WriteFile<Store>(new List<Store>()
-        {
-          new GroceryStore(),
-          new OnlineStore(),
-          new AthleticStore()
-        }, _path);
-
-
-
-      // if (fileadapt.ReadFile<Store>(_path) == null)
-      // {
-      //   fileadapt.WriteFile<Store>(new List<Store>()
+      // fileadapt.WriteFile<Store>(new List<Store>()
       //   {
       //     new GroceryStore(),
       //     new OnlineStore(),
       //     new AthleticStore()
       //   }, _path);
-      // }
+
+
+
+      if (fileadapt.ReadFile<Store>(_path) == null)
+      {
+        fileadapt.WriteFile<Store>(new List<Store>()
+        {
+          new GroceryStore(),
+          new OnlineStore(),
+          new AthleticStore()
+        }, _path);
+      }
       Stores = fileadapt.ReadFile<Store>(_path);
     }
 

@@ -4,10 +4,10 @@ namespace Project0.Storeapplicaton.Domain.Models
 {
 
 
-  public class AthleticStoreProducts : Product
+  public class AthleticStoreProduct : Product
   {
 
-    public AthleticStoreProducts()
+    public AthleticStoreProduct()
     {
       storeTypeName = "AthleticStore";
     }
