@@ -10,7 +10,7 @@ namespace Project0.StoreApplication.Storage.Repositories
   {
     public List<Store> Stores { get; }
 
-    private const string _path = @"/home/marcus/revature/marcus_code/data/project_0.xml";
+    private const string _path = @"/home/marcus/revature/marcus_code/Data/project_0.xml";
 
     private StoreRepository()
     {
