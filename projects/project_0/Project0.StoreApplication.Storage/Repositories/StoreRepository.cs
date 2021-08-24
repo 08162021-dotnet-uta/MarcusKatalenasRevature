@@ -12,8 +12,6 @@ namespace Project0.StoreApplication.Storage.Repositories
   {
     public List<Store> Stores { get; set; }
 
-    List<Store> IRepo<Store>.Select => throw new NotImplementedException();
-
     private const string _path = @"/home/marcus/revature/marcus_code/Data/project_0.xml";
 
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
@@ -52,9 +50,5 @@ namespace Project0.StoreApplication.Storage.Repositories
       return _fileAdapter.ReadFile<Store>(_path);
       //throw new System.NotImplementedException();
     }
-
-
   }
-
-
 }

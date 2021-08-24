@@ -10,6 +10,6 @@ namespace Project0.StoreApplication.Domain.Interfaces
     bool Insert(T entry);
     T Update();
 
-    List<T> Select { get; }
+    List<T> Select();
   }
 }

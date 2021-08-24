@@ -8,5 +8,15 @@ namespace Project0.StoreApplication.Domain.Models
   {
     public string userName { get; set; }
 
+
+    public Customer()
+    {
+
+    }
+    public Customer(string name)
+    {
+      userName = name;
+    }
+
   }
 }

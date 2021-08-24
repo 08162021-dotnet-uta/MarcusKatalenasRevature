@@ -36,16 +36,5 @@ namespace Project0.StoreApplication.Testing
       Assert.NotNull(store);
     }
 
-
-    [Theory]
-    [InlineData(0)]
-    public void Test_GetStoreNull(int i)
-    {
-      var sut = StoreSingleton.Instance;
-
-      var store = sut.Stores[i];
-
-      Assert.Null(store);
-    }
   }
 }

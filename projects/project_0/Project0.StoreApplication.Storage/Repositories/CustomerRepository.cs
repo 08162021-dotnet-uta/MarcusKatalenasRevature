@@ -10,9 +10,9 @@ namespace Project0.StoreApplication.Storage.Repositories
   {
     public List<Customer> Customers { get; set; }
 
-    List<Customer> IRepo<Customer>.Select => throw new NotImplementedException();
 
-    private const string _path = @"/home/marcus/revature/marcus_code/data/customers.xml";
+
+    private const string _path = @"/home/marcus/revature/marcus_code/Data/customers.xml";
 
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 
@@ -20,7 +20,12 @@ namespace Project0.StoreApplication.Storage.Repositories
     {
       if (_fileAdapter.ReadFile<Customer>(_path) == null)
       {
-        _fileAdapter.WriteFile<Customer>(_path, new List<Customer>());
+        _fileAdapter.WriteFile<Customer>(_path, new List<Customer>(){
+
+          new Customer("Marcus"),
+          new Customer("Luke"),
+          new Customer("John")
+        });
       }
     }
 
@@ -39,11 +44,9 @@ namespace Project0.StoreApplication.Storage.Repositories
     {
       throw new System.NotImplementedException();
     }
-
     public List<Customer> Select()
     {
       return _fileAdapter.ReadFile<Customer>(_path);
-      //throw new System.NotImplementedException();
     }
 
 
