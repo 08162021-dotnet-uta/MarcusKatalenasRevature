@@ -13,31 +13,28 @@ namespace Project0.StoreApplication.Storage.Adapters
     {
 
 
+      if (!File.Exists(path))
+      {
+        return null;
+      }
+
       var file = new StreamReader(path);
-
       var xml = new XmlSerializer(typeof(List<T>));
-
-      //Deseiral
       var data = xml.Deserialize(file) as List<T>;
 
       return data;
 
     }
-    public void WriteFile<T>(List<T> data, string path) where T : class
+    public void WriteFile<T>(string path, List<T> data) where T : class
     {
 
       var file = new StreamWriter(path);
-
       var xml = new XmlSerializer(typeof(List<T>));
 
       xml.Serialize(file, data);
 
       file.Close();
 
-    }
-    public void UseReadFile()
-    {
-      ReadFile<Store>("path");
     }
   }
 }

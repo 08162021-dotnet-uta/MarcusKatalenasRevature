@@ -9,13 +9,13 @@ namespace Project0.StoreApplication.Testing
     public void Test_CustomerCollection()
     {
       // arrange = instance of the entity of the entity to test //sut Subject under test
-      var sut = new CustomerRepository();
+      // var sut = new CustomerRepository();
 
-      // act = execute sut for data
-      var actual = sut.Customers;
+      // // act = execute sut for data
+      // var actual = sut.Customers;
 
-      // assert
-      Assert.NotNull(actual);
+      // // assert
+      // Assert.NotNull(actual);
     }
   }
 }

@@ -1,41 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
+using Project0.StoreApplication.Client.SingleTons;
 using Project0.StoreApplication.Domain.Abstracts;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Repositories;
 using Serilog;
 
+
+/// <summary>
+/// Defines the Program Class
+/// </summary>
 namespace Project0.StoreApplication.Client
 {
   class Program
   {
 
     //Singular instance at runtime 
-    private readonly StoreRepository _storeRepo = StoreRepository.Instance;
+    private static readonly StoreSingleton _storeRepo = StoreSingleton.Instance;
+    private static readonly CustomerSingleton _customerRepo = CustomerSingleton.Instance;
+    private static readonly ProductRepository _productRepo = new ProductRepository();
+
+    private const string _logfilePath = @"/home/marcus/revature/marcus_code/Data/logs.txt";
+
+    /// <summary>
+    /// Defines the main method
+    /// </summary>
+    /// <param name="args"></param>
     static void Main(string[] args)
     {
 
       Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
 
 
-      var p = new Program();
+      Run();
 
-      Console.WriteLine("Hello");
-
-
-      //Customer 
-      p.printAllCustomers();
-      var customer = p.SelectCustomer();
-
-      //Stores
-      p.PrintAllStoreLocations();
-      var store = p.selectStore();
-
-      p.printProducts();
-      p.purchaseProducts(customer, store);
     }
 
-    void printAllCustomers()
+    /// <summary>
+    /// 
+    /// </summary>
+    static void Run()
+    {
+      Log.Information("method run()");
+
+      //Customers
+      Output<Customer>(_customerRepo.Customers);
+      //Store
+      Output<Store>(_storeRepo.Stores);
+      //Products
+      Output<Product>(_productRepo.Products);
+
+      //Place an order
+
+      CaptureOutput();
+    }
+
+    private static void Output<T>(List<T> data) where T : class
+    {
+      Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
+
+      foreach (var type in data)
+      {
+        Console.WriteLine(type);
+      }
+    }
+
+    private static void CaptureOutput()
+    {
+      Output<Store>(_storeRepo.Stores);
+      Output<Customer>(_customerRepo.Customers);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    static void printAllCustomers()
     {
       var customerRep = new CustomerRepository();
       int customerid = 1;
@@ -46,6 +85,11 @@ namespace Project0.StoreApplication.Client
         customerid += 1;
       }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     Customer SelectCustomer()
     {
       var cr = new CustomerRepository().Customers;
@@ -58,7 +102,11 @@ namespace Project0.StoreApplication.Client
       return customer;
     }
 
-    void PrintAllStoreLocations()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    static void PrintAllStoreLocations()
     {
 
       Log.Information("Store Output Method");
@@ -72,6 +120,11 @@ namespace Project0.StoreApplication.Client
       }
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     Store selectStore()
     {
       Log.Information("In SelctStore Output Method");
@@ -85,6 +138,10 @@ namespace Project0.StoreApplication.Client
       return store;
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
     void printProducts()
     {
       var productRepo = new ProductRepository();

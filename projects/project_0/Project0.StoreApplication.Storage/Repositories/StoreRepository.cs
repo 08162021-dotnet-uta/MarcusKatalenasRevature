@@ -1,67 +1,60 @@
+using System;
 using System.Collections.Generic;
 using Project0.StoreApplication.Domain.Abstracts;
+using Project0.StoreApplication.Domain.Interfaces;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
 using Project0.Storeapplicaton.Domain.Models;
 
 namespace Project0.StoreApplication.Storage.Repositories
 {
-  public class StoreRepository
+  public class StoreRepository : IRepo<Store>
   {
-    public List<Store> Stores { get; }
+    public List<Store> Stores { get; set; }
+
+    List<Store> IRepo<Store>.Select => throw new NotImplementedException();
 
     private const string _path = @"/home/marcus/revature/marcus_code/Data/project_0.xml";
 
-    private StoreRepository()
+    private static readonly FileAdapter _fileAdapter = new FileAdapter();
+
+    public StoreRepository()
     {
-
-      var fileadapt = new FileAdapter();
-
-      // fileadapt.WriteFile<Store>(new List<Store>()
-      //   {
-      //     new GroceryStore(),
-      //     new OnlineStore(),
-      //     new AthleticStore()
-      //   }, _path);
-
-
-
-      if (fileadapt.ReadFile<Store>(_path) == null)
+      if (_fileAdapter.ReadFile<Store>(_path) == null)
       {
-        fileadapt.WriteFile<Store>(new List<Store>()
+        _fileAdapter.WriteFile<Store>(_path, new List<Store>()
         {
           new GroceryStore(),
           new OnlineStore(),
           new AthleticStore()
-        }, _path);
+        });
       }
-      Stores = fileadapt.ReadFile<Store>(_path);
     }
 
-    private static StoreRepository _storeRepo;
 
-    public static StoreRepository Instance
+    public bool Delete()
     {
-      get
-      {
-        if (_storeRepo == null)
-        {
-          _storeRepo = new StoreRepository();
-        }
-        return _storeRepo;
-      }
+      throw new System.NotImplementedException();
     }
 
-    public Store GetStore(int index)
+    public bool Insert(Store entry)
     {
-      try
-      {
-        return Stores[index];
-      }
-      catch
-      {
-        return null;
-      }
+      throw new System.NotImplementedException();
     }
+
+    public Store Update()
+    {
+      throw new System.NotImplementedException();
+    }
+
+    public List<Store> Select()
+    {
+      return _fileAdapter.ReadFile<Store>(_path);
+      //throw new System.NotImplementedException();
+    }
+
+
   }
+
+
 }

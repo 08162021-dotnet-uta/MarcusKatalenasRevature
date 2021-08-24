@@ -18,14 +18,8 @@ namespace Project0.StoreApplication.Storage.Repositories
 
       var fileadapt = new FileAdapter();
 
-      fileadapt.WriteFile<Product>(new List<Product>()
-      {
-        new GroceryStoreProduct(){ Name = "Apple", Price = 1.00},
-        new AthleticStoreProduct(){ Name = "Glove",  Price = 8.00},
-        new OnlineStoreProduct(){ Name = "USB Adapter",  Price = 10.00}
-      }, _path);
 
-      Products = fileadapt.ReadFile<Product>(_path);
+
 
     }
   }

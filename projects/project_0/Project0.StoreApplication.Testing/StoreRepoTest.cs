@@ -1,16 +1,19 @@
 
 using Xunit;
 using Project0.StoreApplication.Storage.Repositories;
+using Project0.StoreApplication.Client.SingleTons;
 
 namespace Project0.StoreApplication.Testing
 {
+
+
   public class StoreRepositoryTests
   {
     [Fact] //TDD 
     public void Test_StoreCollection()
     {
       // arrange = instance of the entity of the entity to test //sut Subject under test
-      var sut = StoreRepository.Instance;
+      var sut = StoreSingleton.Instance;
 
       // act = execute sut for data
       var actual = sut.Stores;
@@ -26,21 +29,21 @@ namespace Project0.StoreApplication.Testing
 
     public void Test_GetStore(int i)
     {
-      var sut = StoreRepository.Instance;
+      var sut = StoreSingleton.Instance;
 
-      var store = sut.GetStore(i);
+      var store = sut.Stores[i];
 
       Assert.NotNull(store);
     }
 
 
     [Theory]
-    [InlineData(-1)]
+    [InlineData(0)]
     public void Test_GetStoreNull(int i)
     {
-      var sut = StoreRepository.Instance;
+      var sut = StoreSingleton.Instance;
 
-      var store = sut.GetStore(i);
+      var store = sut.Stores[i];
 
       Assert.Null(store);
     }
