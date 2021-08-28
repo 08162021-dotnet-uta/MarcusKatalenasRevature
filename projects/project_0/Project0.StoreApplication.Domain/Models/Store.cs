@@ -7,9 +7,9 @@ namespace Project0.StoreApplication.Domain.Abstracts
 {
 
  
-  public abstract class Store
+  public class Store
   {
-    public int storeID;
+    public int storeID { get; set; }
     public string Name { get; set; }
 
     public string Location { get; set; }
