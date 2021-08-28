@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Project0.StoreApplication.Client.SingleTons;
 using Project0.StoreApplication.Domain.Abstracts;
 using Project0.StoreApplication.Domain.Models;
+using Project0.StoreApplication.Storage;
 using Project0.StoreApplication.Storage.Repositories;
 using Serilog;
 
@@ -32,7 +33,9 @@ namespace Project0.StoreApplication.Client
       Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
 
 
-      Run();
+      //Run();
+
+      SqlTest();
 
     }
 
@@ -55,6 +58,16 @@ namespace Project0.StoreApplication.Client
       CaptureOutput();
     }
 
+    static void SqlTest()
+    {
+      var def = new DemoEF();
+
+      foreach (var item in def.GetCustomers())
+      {
+        Console.WriteLine(item);
+      }
+    }
+
     private static void Output<T>(List<T> data) where T : class
     {
       Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
@@ -69,6 +82,11 @@ namespace Project0.StoreApplication.Client
     {
       Output<Store>(_storeRepo.Stores);
       Output<Customer>(_customerRepo.Customers);
+    }
+
+    private static void MainMenu()
+    {
+
     }
 
     /// <summary>

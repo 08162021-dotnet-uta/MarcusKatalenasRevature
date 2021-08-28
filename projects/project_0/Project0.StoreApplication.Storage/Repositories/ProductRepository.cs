@@ -3,15 +3,13 @@ using Project0.StoreApplication.Domain.Abstracts;
 using Project0.StoreApplication.Domain.Interfaces;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
-using Project0.Storeapplicaton.Domain.Models;
+
 
 namespace Project0.StoreApplication.Storage.Repositories
 {
   public class ProductRepository : IRepo<Product>
   {
     public List<Product> Products { get; }
-
-
 
     private const string _path = @"/home/marcus/revature/marcus_code/Data/project_0_Products.xml";
 
@@ -24,9 +22,7 @@ namespace Project0.StoreApplication.Storage.Repositories
       {
         _fileAdapter.WriteFile<Product>(_path, new List<Product>()
         {
-          new GroceryStoreProduct(),
-          new OnlineStoreProduct(),
-          new AthleticStoreProduct()
+
         });
       }
     }

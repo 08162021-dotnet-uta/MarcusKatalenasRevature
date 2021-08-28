@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Project0.StoreApplication.Domain.Abstracts;
 
 namespace Project0.StoreApplication.Domain.Models
@@ -5,12 +6,14 @@ namespace Project0.StoreApplication.Domain.Models
 {
   public class Order
   {
+
+    public int orderID;
     public Customer customer { get; set; }
-    public Store s { get; set; }
+    public Store store { get; set; }
 
-    public double price;
+    public List<Product> listofProducts { get; set; }
 
-    //public List<Product> o { get; set; }
+    public double finalPrice;
 
   }
 }
