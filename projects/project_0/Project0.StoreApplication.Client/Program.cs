@@ -33,10 +33,9 @@ namespace Project0.StoreApplication.Client
       Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
 
 
-            //Run();
+      //Run();
 
-            SqlCustomerTest();
-            SqlStoreTest();
+      SqlTest();
 
     }
 
@@ -59,10 +58,9 @@ namespace Project0.StoreApplication.Client
       CaptureOutput();
     }
 
-    static void SqlCustomerTest()
+    static void SqlTest()
     {
       var def = new DemoEF();
-      
 
       foreach (var item in def.GetCustomers())
       {
@@ -70,29 +68,7 @@ namespace Project0.StoreApplication.Client
       }
     }
 
-        static void SqlStoreTest()
-        {
-            var def = new DemoEF();
-
-
-            foreach (var item in def.GetCustomers())
-            {
-                Console.WriteLine(item);
-            }
-        }
-
-        static void SqlProductTest()
-        {
-            var def = new DemoEF();
-
-
-            foreach (var item in def.GetCustomers())
-            {
-                Console.WriteLine(item);
-            }
-        }
-
-        private static void Output<T>(List<T> data) where T : class
+    private static void Output<T>(List<T> data) where T : class
     {
       Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
 
@@ -208,7 +184,7 @@ namespace Project0.StoreApplication.Client
       var option = int.Parse(Console.ReadLine());
       var product = pr[option - 1];
 
-      Console.WriteLine("You have bought " + product.ProductName + " from " + store.Name);
+      Console.WriteLine("You have bought " + product.Name + " from " + store.Name);
 
     }
 

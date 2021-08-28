@@ -6,20 +6,18 @@ namespace Project0.StoreApplication.Domain.Abstracts
 {
 
 
-    public class Product
+  public abstract class Product
   {
-    public int productID { get; set; }
-    public string ProductName { get; set; }
-
-    public int StoreID { get; set; }
+    public int productID;
+    public string Name { get; set; }
 
     public double Price { get; set; }
 
-  
+    public string storeTypeName { get; set; }
 
     public override string ToString()
     {
-      return ProductName + " " + "$" + Price;
+      return Name + " " + "$" + Price;
     }
   }
 }
