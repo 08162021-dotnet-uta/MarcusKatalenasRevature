@@ -7,7 +7,7 @@ namespace Project0.StoreApplication.Domain.Models
   public class Order
   {
 
-    public int orderID;
+    public int OrderID { get; set; }
     public Customer customer { get; set; }
     public Store store { get; set; }
 
