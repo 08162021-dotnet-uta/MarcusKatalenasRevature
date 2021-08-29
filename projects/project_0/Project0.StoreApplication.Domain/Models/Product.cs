@@ -1,21 +1,20 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
 
-namespace Project0.StoreApplication.Domain.Abstracts
+namespace Project0.StoreApplication.Domain.Models
 {
 
 
     public class Product
   {
-    public int productID { get; set; }
+    public byte ProductID { get; set; }
     public string ProductName { get; set; }
 
-    public int StoreID { get; set; }
-
+    public byte StoreID { get; set; }
+   
     public double Price { get; set; }
-
-  
 
     public override string ToString()
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Project0.StoreApplication.Client.SingleTons;
-using Project0.StoreApplication.Domain.Abstracts;
+
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage;
 using Project0.StoreApplication.Storage.Repositories;
@@ -19,7 +19,7 @@ namespace Project0.StoreApplication.Client
     //Singular instance at runtime 
     private static readonly StoreSingleton _storeRepo = StoreSingleton.Instance;
     private static readonly CustomerSingleton _customerRepo = CustomerSingleton.Instance;
-    private static readonly ProductRepository _productRepo = new ProductRepository();
+    private static readonly ProductSingleton _productRepo = ProductSingleton.Instance;
 
     private const string _logfilePath = @"/home/marcus/revature/marcus_code/Data/logs.txt";
 
@@ -34,11 +34,14 @@ namespace Project0.StoreApplication.Client
 
 
             //Run();
-
+            
             SqlCustomerTest();
             SqlStoreTest();
+            //SqlProductTest();
+            SqlOrderTest();
 
-    }
+
+        }
 
     /// <summary>
     /// 
@@ -75,7 +78,7 @@ namespace Project0.StoreApplication.Client
             var def = new DemoEF();
 
 
-            foreach (var item in def.GetCustomers())
+            foreach (var item in def.GetStores())
             {
                 Console.WriteLine(item);
             }
@@ -86,7 +89,17 @@ namespace Project0.StoreApplication.Client
             var def = new DemoEF();
 
 
-            foreach (var item in def.GetCustomers())
+            foreach (var item in def.GetProducts())
+            {
+                Console.WriteLine(item);
+            }
+        }
+        static void SqlOrderTest()
+        {
+            var def = new DemoEF();
+
+
+            foreach (var item in def.GetOrders())
             {
                 Console.WriteLine(item);
             }
@@ -208,7 +221,7 @@ namespace Project0.StoreApplication.Client
       var option = int.Parse(Console.ReadLine());
       var product = pr[option - 1];
 
-      Console.WriteLine("You have bought " + product.ProductName + " from " + store.Name);
+      Console.WriteLine("You have bought " + product.ProductName + " from " + store.storeName);
 
     }
 

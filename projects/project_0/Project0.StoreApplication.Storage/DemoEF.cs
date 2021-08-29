@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
 
@@ -17,17 +16,21 @@ namespace Project0.StoreApplication.Storage
           return _da.Customers.FromSqlRaw("select * from Customer.Customer;").ToList();
         }
 
-        public List<Store> GetStore()
+        public List<Store> GetStores()
         {
-            return _da.Customers.FromSqlRaw("select * from Store.Store;").ToList();
+            return _da.Stores.FromSqlRaw("select * from Store.Store;").ToList();
         }
-        public List<Order> GetOrder()
+
+        public List<Order> GetOrders()
         {
-            return _da.Customers.FromSqlRaw("select * from Store.Order;").ToList();
+            return _da.Orders.FromSqlRaw("Select OrderID, c.[Name], s.storeName from Store.[Order] as so join Customer.Customer c on(so.CustomerId = c.CustomerID) join Store.Store as s on(so.StoreID = s.StoreID);").ToList();
         }
-        public List<Product> GetProduct(int ID)
+
+        public List<Product> GetProducts()
         {
-            return _da.Customers.FromSqlRaw("select * from Store.Product where ProdcutID = {ID};").ToList();
+            return _da.Products.FromSqlRaw("Select * from Store.Product;").ToList();
         }
+
+
     }
 }

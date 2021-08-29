@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project0.StoreApplication.Domain.Abstracts;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project0.StoreApplication.Domain.Models
 
@@ -10,9 +10,8 @@ namespace Project0.StoreApplication.Domain.Models
     public int OrderID { get; set; }
     public Customer customer { get; set; }
     public Store store { get; set; }
-
-    public List<Product> listofProducts { get; set; }
-
+   
+     [NotMapped]
     public double finalPrice;
 
   }
