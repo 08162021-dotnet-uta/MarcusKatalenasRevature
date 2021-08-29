@@ -37,7 +37,7 @@ namespace Project0.StoreApplication.Client
             
             SqlCustomerTest();
             SqlStoreTest();
-            //SqlProductTest();
+            SqlProductTest();
             SqlOrderTest();
 
 

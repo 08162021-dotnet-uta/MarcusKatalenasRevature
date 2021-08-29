@@ -23,12 +23,12 @@ namespace Project0.StoreApplication.Storage
 
         public List<Order> GetOrders()
         {
-            return _da.Orders.FromSqlRaw("Select OrderID, c.[Name], s.storeName from Store.[Order] as so join Customer.Customer c on(so.CustomerId = c.CustomerID) join Store.Store as s on(so.StoreID = s.StoreID);").ToList();
+            return _da.Orders.FromSqlRaw("Select * from Store.[Order];").ToList();
         }
 
         public List<Product> GetProducts()
         {
-            return _da.Products.FromSqlRaw("Select * from Store.Product;").ToList();
+            return _da.Products.FromSqlRaw("Select ProductID, ProductName, Price, StoreID from Store.Product;").ToList();
         }
 
 

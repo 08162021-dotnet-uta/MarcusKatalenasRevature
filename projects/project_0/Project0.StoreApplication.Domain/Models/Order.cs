@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,12 +8,19 @@ namespace Project0.StoreApplication.Domain.Models
   public class Order
   {
 
-    public int OrderID { get; set; }
-    public Customer customer { get; set; }
-    public Store store { get; set; }
+    public byte OrderID { get; set; }
+    public byte CustomerID { get; set; }
+    public byte StoreID { get; set; }
+
+    public DateTime OrderDate { get; set; }
    
-     [NotMapped]
+    [NotMapped]
     public double finalPrice;
 
-  }
+        public override string ToString()
+        {
+            return OrderID +  " " + CustomerID + " " + StoreID + " " + OrderDate;
+        }
+
+    }
 }
