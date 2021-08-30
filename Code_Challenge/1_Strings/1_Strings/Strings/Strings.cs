@@ -101,7 +101,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string ConcatNames(string fName, string lName)
         {
-            return fName + " " +  lName;
+            return String.Concat(fName, " " ,lName);
         }
     }//end of program
 }
