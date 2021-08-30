@@ -18,6 +18,7 @@ namespace Project0.StoreApplication.Storage.Repositories
 
     public StoreRepository()
     {
+       /*
       if (_fileAdapter.ReadFile<Store>(_path) == null)
       {
         _fileAdapter.WriteFile<Store>(_path, new List<Store>()
@@ -25,6 +26,7 @@ namespace Project0.StoreApplication.Storage.Repositories
 
         });
       }
+       */
     }
 
 

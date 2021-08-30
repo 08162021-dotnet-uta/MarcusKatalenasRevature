@@ -34,11 +34,21 @@ namespace Project0.StoreApplication.Client
 
 
             //Run();
-            
-            SqlCustomerTest();
-            SqlStoreTest();
-            SqlProductTest();
-            SqlOrderTest();
+
+            //Select Customer
+
+            //Select Store
+            //Look At Products of store
+            //Force Order the only product in the store
+
+              Customer currentCustomer = SqlCustomerTest();
+              Store store = SqlStoreTest();
+              SqlProductTest(store.storeName);
+              
+               SqlCustomerOrderTest(currentCustomer);
+               SqlStoreOrderTest(store);
+
+          
 
 
         }
@@ -62,44 +72,80 @@ namespace Project0.StoreApplication.Client
       CaptureOutput();
     }
 
-    static void SqlCustomerTest()
+    static Customer SqlCustomerTest()
     {
       var def = new DemoEF();
-      
-
+      int customerid = 1;
       foreach (var item in def.GetCustomers())
       {
-        Console.WriteLine(item);
+        Console.WriteLine(customerid + " " + item.Name);
+                customerid += 1;
       }
-    }
+            Console.WriteLine("Who are you?");
 
-        static void SqlStoreTest()
+            var option = int.Parse(Console.ReadLine());
+            var customer = def.GetCustomers()[option - 1];
+            return customer;
+        }
+
+     static void insertCustomer()
+        {
+            Console.WriteLine("Enter Name");
+            String Name = (Console.ReadLine());
+
+            CustomerRepository cr = new CustomerRepository();
+
+            Customer newCustomer = new Customer(Name);
+
+            cr.Insert(newCustomer);
+        }
+
+        static Store SqlStoreTest()
         {
             var def = new DemoEF();
-
+            int storeID = 1;
 
             foreach (var item in def.GetStores())
             {
-                Console.WriteLine(item);
+                Console.WriteLine(storeID + " " + item.storeName);
+                storeID += 1;
             }
+
+            Console.WriteLine("What store do you want to shop at?");
+
+            var option = int.Parse(Console.ReadLine());
+            var store = def.GetStores()[option - 1];
+            return store;
+
         }
 
-        static void SqlProductTest()
+        static void SqlProductTest(string StoreName)
         {
             var def = new DemoEF();
 
-
-            foreach (var item in def.GetProducts())
+            Console.WriteLine("Avaliable Products at " + StoreName);
+            foreach (var item in def.GetProducts(StoreName))
             {
                 Console.WriteLine(item);
             }
         }
-        static void SqlOrderTest()
+        static void SqlCustomerOrderTest(Customer cust)
         {
             var def = new DemoEF();
 
+            Console.WriteLine("Printing Past " + cust.Name + " Orders");
+            foreach (var item in def.GetCustomerOrders(cust))
+            {
+                Console.WriteLine(item);
+            }
+        }
 
-            foreach (var item in def.GetOrders())
+        static void SqlStoreOrderTest(Store store)
+        {
+            var def = new DemoEF();
+
+            Console.WriteLine("Printing Past Orders from " + store.storeName);
+            foreach (var item in def.GetStoreOrders(store))
             {
                 Console.WriteLine(item);
             }
