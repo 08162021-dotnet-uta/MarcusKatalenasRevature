@@ -18,6 +18,9 @@ namespace Project0.StoreApplication.Storage.Repositories
 
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 
+    /// <summary>
+    /// 
+    /// </summary>
     public CustomerRepository()
     {
             /*
@@ -43,8 +46,9 @@ namespace Project0.StoreApplication.Storage.Repositories
         {
             try
             {
-                String name = entry.Name;
-                _da.Customers.FromSqlRaw($"INSERT into Customer.Customer([Name]) Values '(@Name)';", entry.Name);
+                // String sqlStatment = $"Execute dbo.SP_AddCustomer @name = '{entry.Name}'";
+                // Console.WriteLine(sqlStatment);
+                _da.Customers.FromSqlInterpolated($"Execute dbo.SP_AddCustomer @name = '{entry.Name};'");
                 return true;
             }
             catch(SqlException E)

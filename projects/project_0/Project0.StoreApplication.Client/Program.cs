@@ -35,18 +35,27 @@ namespace Project0.StoreApplication.Client
 
             //Run();
 
-            //Select Customer
+            
 
-            //Select Store
-            //Look At Products of store
-            //Force Order the only product in the store
+           
+                //Select Customer
+             // Customer currentCustomer = SqlCustomerTest();
+                
+            //Select a Store
+              //Store store = SqlStoreTest();
 
-              Customer currentCustomer = SqlCustomerTest();
-              Store store = SqlStoreTest();
-              SqlProductTest(store.storeName);
-              
-               SqlCustomerOrderTest(currentCustomer);
-               SqlStoreOrderTest(store);
+            //Print products from the selected store
+            // SqlProductTest(store.storeName);
+
+            //Print past orders from the customer 
+            // SqlCustomerOrderTest(currentCustomer);
+
+            //Print past orders from the store
+            //  SqlStoreOrderTest(store);
+
+            insertCustomer();
+
+
 
           
 
