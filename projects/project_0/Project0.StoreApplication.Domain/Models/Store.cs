@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 
 
-namespace Project0.StoreApplication.Domain.Abstracts
+namespace Project0.StoreApplication.Domain.Models
 {
 
  
-  public abstract class Store
+  public class Store
   {
-    public int storeID;
-    public string Name { get; set; }
-
-    public string Location { get; set; }
-
-    public List<Product> listOfProudcts = new List<Product>();
-
-
+    public byte storeID { get; set; }
+    public string storeName { get; set; }
     public override string ToString()
     {
-      return Name + " " + Location;
+            return storeName;
     }
 
   }// end of class  

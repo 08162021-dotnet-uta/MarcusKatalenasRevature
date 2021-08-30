@@ -1,23 +1,24 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
 
-namespace Project0.StoreApplication.Domain.Abstracts
+namespace Project0.StoreApplication.Domain.Models
 {
 
 
-  public abstract class Product
+    public class Product
   {
-    public int productID;
-    public string Name { get; set; }
+    public byte ProductID { get; set; }
+    public string ProductName { get; set; }
 
-    public double Price { get; set; }
-
-    public string storeTypeName { get; set; }
+    public byte StoreID { get; set; }
+   
+    public decimal Price { get; set; }
 
     public override string ToString()
     {
-      return Name + " " + "$" + Price;
+      return ProductName + " " + "$" + Price;
     }
   }
 }

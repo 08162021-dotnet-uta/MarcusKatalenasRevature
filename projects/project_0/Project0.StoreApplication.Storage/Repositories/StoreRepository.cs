@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Project0.StoreApplication.Domain.Abstracts;
+
 using Project0.StoreApplication.Domain.Interfaces;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
@@ -18,6 +18,7 @@ namespace Project0.StoreApplication.Storage.Repositories
 
     public StoreRepository()
     {
+       /*
       if (_fileAdapter.ReadFile<Store>(_path) == null)
       {
         _fileAdapter.WriteFile<Store>(_path, new List<Store>()
@@ -25,6 +26,7 @@ namespace Project0.StoreApplication.Storage.Repositories
 
         });
       }
+       */
     }
 
 

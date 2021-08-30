@@ -42,7 +42,6 @@ namespace Project0.StoreApplication.Client.SingleTons
     public void Add(Customer cust)
     {
       _customerRepo.Insert(cust);
-      Customers = _customerRepo.Select();
     }
   }
 }

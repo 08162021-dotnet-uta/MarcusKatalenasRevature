@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Project0.StoreApplication.Domain.Models
 {
 
@@ -8,18 +10,26 @@ namespace Project0.StoreApplication.Domain.Models
   public class Customer
   {
 
-    public int customerId;
-    public string userName { get; set; }
+    public byte CustomerID { get; set; }
+    public string Name { get; set; }
+
+    public List<Order> Orders { get; set; }
+
 
 
     public Customer()
     {
-
+            Orders = new List<Order>();
     }
-    public Customer(string name)
+    public Customer(string nameGiven)
     {
-      userName = name;
+      Name = nameGiven;
     }
 
-  }
+        public override string ToString()
+        {
+            return $"{CustomerID} {Name} with {Orders.Count} Orders so far";
+        }
+
+    }
 }
