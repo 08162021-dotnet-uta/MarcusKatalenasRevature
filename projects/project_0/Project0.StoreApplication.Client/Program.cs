@@ -30,7 +30,7 @@ namespace Project0.StoreApplication.Client
     static void Main(string[] args)
     {
 
-      Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+      Log.Logger = new LoggerConfiguration().WriteTo.File(_logfilePath).CreateLogger();
 
 
             //Run();
@@ -44,16 +44,18 @@ namespace Project0.StoreApplication.Client
             //Select a Store
               Store store = SqlStoreTest();
 
-            //Print products from the selected store
-            Product product = SqlProductTest(store.storeName);
+            MainMenu(currentCustomer, store);
 
-            insertOrder(currentCustomer, store, product);
+            //Print products from the selected store
+          //  Product product = SqlProductTest(store.storeName);
+
+           // InsertOrder(currentCustomer, store, product);
 
             //Print past orders from the customer 
-            SqlCustomerOrderTest(currentCustomer);
+           // SqlCustomerOrderTest(currentCustomer);
 
             //Print past orders from the store
-             SqlStoreOrderTest(store);
+            // SqlStoreOrderTest(store);
 
            
 
@@ -85,6 +87,10 @@ namespace Project0.StoreApplication.Client
       CaptureOutput();
     }
 
+     /// <summary>
+     /// This method is used to print customers from the database and give the user the option to select a customer SPLITT THIS 
+     /// </summary>
+     /// <returns></returns>
     static Customer SqlCustomerTest()
     {
       var def = new DemoEF();
@@ -101,6 +107,9 @@ namespace Project0.StoreApplication.Client
             return customer;
         }
 
+        /// <summary>
+        /// Method used to insert a customer into the database
+        /// </summary>
      static void insertCustomer()
         {
             Console.WriteLine("Enter Name");
@@ -113,6 +122,10 @@ namespace Project0.StoreApplication.Client
             cr.Insert(newCustomer);
         }
 
+        /// <summary>
+        /// This method is used to select a store from the database
+        /// </summary>
+        /// <returns></returns>
         static Store SqlStoreTest()
         {
             var def = new DemoEF();
@@ -132,6 +145,11 @@ namespace Project0.StoreApplication.Client
 
         }
 
+        /// <summary>
+        /// This method is used to select a product from the selected store
+        /// </summary>
+        /// <param name="StoreName"></param>
+        /// <returns></returns>
         static Product SqlProductTest(string StoreName)
         {
             var def = new DemoEF();
@@ -151,6 +169,11 @@ namespace Project0.StoreApplication.Client
             return Product;
 
         }
+
+        /// <summary>
+        /// This method Prints out the orders made by the current customer
+        /// </summary>
+        /// <param name="cust"></param>
         static void SqlCustomerOrderTest(Customer cust)
         {
             var def = new DemoEF();
@@ -162,7 +185,10 @@ namespace Project0.StoreApplication.Client
             }
         }
 
-        ///
+        /// <summary>
+        /// This method prints the orders made from the selected store
+        /// </summary>
+        /// <param name="store"></param>
         static void SqlStoreOrderTest(Store store)
         {
             var def = new DemoEF();
@@ -179,9 +205,9 @@ namespace Project0.StoreApplication.Client
         /// </summary>
         /// <param name="cust"></param>
         /// <param name="store"></param>
-        static void insertOrder(Customer cust, Store store, Product product)
+        static void InsertOrder(Customer cust, Store store, Product product)
         {
-            var def = new DemoEF();
+            _ = new DemoEF();
 
             Order newOrder = new Order(cust.CustomerID, store.storeID);
 
@@ -207,8 +233,46 @@ namespace Project0.StoreApplication.Client
       Output<Customer>(_customerRepo.Customers);
     }
 
-    private static void MainMenu()
+    private static void MainMenu(Customer cust, Store store)
     {
+            Console.WriteLine("\n\nWelcome " + cust.Name + " to the " + store.storeName);
+
+            var option = 0;
+
+            while(option != 999)
+            {
+                Console.WriteLine("Select an action ");
+                Console.WriteLine("1. Look at your past Orders");
+                Console.WriteLine("2. Look at your selected store past Orders");
+                Console.WriteLine("3. Place an Order");
+                Console.WriteLine("999. Exit");
+
+                option = int.Parse(Console.ReadLine());
+
+                if(option == 1)
+                {
+                    Console.WriteLine("\n");
+                    SqlCustomerOrderTest(cust);
+                }
+                else if(option == 2)
+                {
+                    Console.WriteLine("\n");
+                    SqlStoreOrderTest(store);
+                }
+                else if(option == 3)
+                {
+                    Console.WriteLine("\n");
+                    Product product = SqlProductTest(store.storeName);
+                    InsertOrder(cust, store, product);
+                }
+                else if(option == 999)
+                {
+                    Console.WriteLine("GoodBye");
+                }
+
+
+
+            }
 
     }
 
