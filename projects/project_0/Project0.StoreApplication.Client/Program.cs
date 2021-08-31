@@ -39,21 +39,25 @@ namespace Project0.StoreApplication.Client
 
            
                 //Select Customer
-             // Customer currentCustomer = SqlCustomerTest();
+            Customer currentCustomer = SqlCustomerTest();
                 
             //Select a Store
-              //Store store = SqlStoreTest();
+              Store store = SqlStoreTest();
 
             //Print products from the selected store
-            // SqlProductTest(store.storeName);
+            Product product = SqlProductTest(store.storeName);
+
+            insertOrder(currentCustomer, store, product);
 
             //Print past orders from the customer 
-            // SqlCustomerOrderTest(currentCustomer);
+            SqlCustomerOrderTest(currentCustomer);
 
             //Print past orders from the store
-            //  SqlStoreOrderTest(store);
+             SqlStoreOrderTest(store);
 
-            insertCustomer();
+           
+
+            //insertCustomer();
 
 
 
@@ -128,15 +132,24 @@ namespace Project0.StoreApplication.Client
 
         }
 
-        static void SqlProductTest(string StoreName)
+        static Product SqlProductTest(string StoreName)
         {
             var def = new DemoEF();
+            int ProductID = 1;
 
             Console.WriteLine("Avaliable Products at " + StoreName);
             foreach (var item in def.GetProducts(StoreName))
             {
-                Console.WriteLine(item);
+                Console.WriteLine(ProductID + " " + item.ProductName + " " + item.Price);
+                ProductID += 1;
             }
+
+            Console.WriteLine("What Product do you want to buy?");
+
+            var option = int.Parse(Console.ReadLine());
+            var Product = def.GetProducts(StoreName)[option - 1];
+            return Product;
+
         }
         static void SqlCustomerOrderTest(Customer cust)
         {
@@ -149,6 +162,7 @@ namespace Project0.StoreApplication.Client
             }
         }
 
+        ///
         static void SqlStoreOrderTest(Store store)
         {
             var def = new DemoEF();
@@ -158,6 +172,23 @@ namespace Project0.StoreApplication.Client
             {
                 Console.WriteLine(item);
             }
+        }
+
+        /// <summary>
+        /// The method used to insert Orders into the sql database table
+        /// </summary>
+        /// <param name="cust"></param>
+        /// <param name="store"></param>
+        static void insertOrder(Customer cust, Store store, Product product)
+        {
+            var def = new DemoEF();
+
+            Order newOrder = new Order(cust.CustomerID, store.storeID);
+
+            OrderRepository or = new OrderRepository();
+
+            or.Insert(newOrder);
+
         }
 
         private static void Output<T>(List<T> data) where T : class
@@ -270,7 +301,7 @@ namespace Project0.StoreApplication.Client
       var pr = new ProductRepository().Products;
 
       //Start a new order
-      Order newOrder = new Order();
+      Order newOrder = new Order(customer.CustomerID, store.storeID);
 
       Console.WriteLine("Select a product you want to buy");
       var option = int.Parse(Console.ReadLine());
