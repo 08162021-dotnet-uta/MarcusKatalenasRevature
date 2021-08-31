@@ -56,7 +56,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string StringTrim(string usersStringWithWhiteSpace)
         {
-            return usersStringWithWhiteSpace.Trim(' ');
+            return usersStringWithWhiteSpace.Trim();
         }
 
         /// <summary>
