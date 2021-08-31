@@ -35,10 +35,11 @@ namespace Project0.StoreApplication.Client
 
             //Run();
 
-            
 
-           
-                //Select Customer
+
+             CreateCustomerMenu();
+            
+             //Select Customer
             Customer currentCustomer = SqlCustomerTest();
                 
             //Select a Store
@@ -46,20 +47,10 @@ namespace Project0.StoreApplication.Client
 
             MainMenu(currentCustomer, store);
 
-            //Print products from the selected store
-          //  Product product = SqlProductTest(store.storeName);
-
-           // InsertOrder(currentCustomer, store, product);
-
-            //Print past orders from the customer 
-           // SqlCustomerOrderTest(currentCustomer);
-
-            //Print past orders from the store
-            // SqlStoreOrderTest(store);
-
+            
            
 
-            //insertCustomer();
+            
 
 
 
@@ -105,6 +96,26 @@ namespace Project0.StoreApplication.Client
             var option = int.Parse(Console.ReadLine());
             var customer = def.GetCustomers()[option - 1];
             return customer;
+        }
+
+        /// <summary>
+        /// This method is the start of the menu where the user is prompted with making a user or skip and log in
+        /// </summary>
+    static void CreateCustomerMenu()
+        { 
+            var option = 0;
+            while(option != 2 && option != 1)
+            {
+                Console.WriteLine("Hello to the StoreApplication app ");
+                Console.WriteLine("1. Exisiting user? ");
+                Console.WriteLine("2. New User");
+
+                option = int.Parse(Console.ReadLine());
+            }
+            if(option == 2)
+            {
+                insertCustomer();
+            }
         }
 
         /// <summary>
