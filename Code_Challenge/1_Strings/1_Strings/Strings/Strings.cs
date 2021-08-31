@@ -71,7 +71,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string StringSubstring(string x, int firstElement, int lengthOfSubsring)
         {
-            return x.Substring(5, 8);
+            return x.Substring(firstElement, lengthOfSubsring);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string ConcatNames(string fName, string lName)
         {
-            return fName + " " +  lName;
+            return String.Concat(fName, " " ,lName);
         }
     }//end of program
 }
