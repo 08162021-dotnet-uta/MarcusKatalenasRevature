@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Project0.StoreApplication.Domain.Interfaces;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
@@ -13,13 +15,16 @@ namespace Project0.StoreApplication.Storage.Repositories
     public List<Order> Orders { get; }
 
     private const string _path = @"/home/marcus/revature/marcus_code/Data/project_0_Orders.xml";
-  
+
+        private readonly DataAdapter _da = new DataAdapter();
 
 
-    public static readonly FileAdapter _fileAdapter = new FileAdapter();
+
+        public static readonly FileAdapter _fileAdapter = new FileAdapter();
 
     public OrderRepository()
     {
+            /*
       if (_fileAdapter.ReadFile<Order>(_path) == null)
       {
         _fileAdapter.WriteFile<Order>(_path, new List<Order>()
@@ -27,6 +32,7 @@ namespace Project0.StoreApplication.Storage.Repositories
           // Will handle later or learn how to properly store this within the Data storage
         });
       }
+            */
     }
 
     public bool Delete()
@@ -36,7 +42,9 @@ namespace Project0.StoreApplication.Storage.Repositories
 
     public bool Insert(Order entry)
     {
-      throw new System.NotImplementedException();
+            Console.WriteLine(entry.CustomerID + " " + entry.StoreID);
+            _da.Database.ExecuteSqlRaw($"Execute dbo.SP_AddOrder @cID = '{entry.CustomerID}', @sID = '{entry.StoreID}';");
+            return true;
     }
 
     public List<Order> Select()

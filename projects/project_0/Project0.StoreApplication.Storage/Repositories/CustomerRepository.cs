@@ -48,7 +48,8 @@ namespace Project0.StoreApplication.Storage.Repositories
             {
                 // String sqlStatment = $"Execute dbo.SP_AddCustomer @name = '{entry.Name}'";
                 // Console.WriteLine(sqlStatment);
-                _da.Customers.FromSqlInterpolated($"Execute dbo.SP_AddCustomer @name = '{entry.Name};'");
+                // _da.Customers.FromSqlInterpolated($"Execute dbo.SP_AddCustomer @name = '{entry.Name};'");
+                _da.Database.ExecuteSqlRaw($"Execute dbo.SP_AddCustomer @name = '{entry.Name}';");
                 return true;
             }
             catch(SqlException E)

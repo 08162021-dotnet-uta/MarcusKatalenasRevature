@@ -16,6 +16,16 @@ namespace Project0.StoreApplication.Domain.Models
    
     [NotMapped]
     public double finalPrice;
+    
+     public Order()
+        {
+
+        }
+    public Order(byte Cid, byte sID)
+        {
+            CustomerID = Cid;
+            StoreID = sID;
+        }
 
         public override string ToString()
         {
