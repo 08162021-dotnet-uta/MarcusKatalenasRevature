@@ -13,7 +13,7 @@ using Serilog;
 /// </summary>
 namespace Project0.StoreApplication.Client
 {
-  class Program
+    class Program
   {
 
     //Singular instance at runtime 
@@ -40,27 +40,17 @@ namespace Project0.StoreApplication.Client
              CreateCustomerMenu();
             
              //Select Customer
-            Customer currentCustomer = SqlCustomerTest();
+            Customer currentCustomer = GetCustomerFromUserPrompt();
                 
             //Select a Store
-              Store store = SqlStoreTest();
+             Store store = SqlStoreTest();
 
             MainMenu(currentCustomer, store);
-
-            
-           
-
-            
-
-
-
-          
-
 
         }
 
     /// <summary>
-    /// 
+    /// The run fucntion to start the code not yet perfectly implemented
     /// </summary>
     static void Run()
     {
@@ -82,14 +72,14 @@ namespace Project0.StoreApplication.Client
      /// This method is used to print customers from the database and give the user the option to select a customer SPLITT THIS 
      /// </summary>
      /// <returns></returns>
-    static Customer SqlCustomerTest()
+    static Customer GetCustomerFromUserPrompt()
     {
       var def = new DemoEF();
       int customerid = 1;
       foreach (var item in def.GetCustomers())
       {
         Console.WriteLine(customerid + " " + item.Name);
-                customerid += 1;
+        customerid += 1;
       }
             Console.WriteLine("Who are you?");
 
