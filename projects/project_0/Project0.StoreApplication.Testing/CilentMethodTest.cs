@@ -1,12 +1,15 @@
 using Xunit;
 using Project0.StoreApplication.Storage.Repositories;
+using Project0.StoreApplication.Client;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace Project0.StoreApplication.Testing
 {
+      
   public class CilentMethodTest
   {
     [Fact] //TDD 
-    public void Test_PrintStores()
+    public void TestSelectACustomer()
     {
       // arrange = instance of the entity of the entity to test //sut Subject under test
 
@@ -17,5 +20,12 @@ namespace Project0.StoreApplication.Testing
       // assert
 
     }
+
+
+    [Fact]
+    public void InsertCustomer()
+        {
+            
+        }
   }
 }

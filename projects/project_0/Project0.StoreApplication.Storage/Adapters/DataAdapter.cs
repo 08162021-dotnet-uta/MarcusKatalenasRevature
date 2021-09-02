@@ -20,15 +20,6 @@ namespace Project0.StoreApplication.Storage.Adapters
     {
       builder.UseSqlServer(@"server=(localdb)\MSSQLLocalDB; database=StoreApplicationDB; Trusted_Connection = True;");
     }
-
-    //public List<Customer> GetCustomers()
-   // {
-     // return _da.Customers.FromSqlRaw("Select Name from Customer.Customer").ToList();
-   // }
-   // public void setCustomer(Customer customer)
-   // {
-    //  _da.Customers.FromSqlRaw("insert into Customer.Customer(Name) values ({0}),", customer.userName);
-   // }
   }
 
 

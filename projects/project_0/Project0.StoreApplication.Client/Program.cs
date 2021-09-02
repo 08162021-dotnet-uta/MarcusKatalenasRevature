@@ -13,7 +13,7 @@ using Serilog;
 /// </summary>
 namespace Project0.StoreApplication.Client
 {
-  class Program
+    class Program
   {
 
     //Singular instance at runtime 
@@ -22,48 +22,37 @@ namespace Project0.StoreApplication.Client
     private static readonly ProductSingleton _productRepo = ProductSingleton.Instance;
 
     private const string _logfilePath = @"/home/marcus/revature/marcus_code/Data/logs.txt";
+   
 
-    /// <summary>
-    /// Defines the main method
-    /// </summary>
-    /// <param name="args"></param>
-    static void Main(string[] args)
+        /// <summary>
+        /// Defines the main method
+        /// </summary>
+        /// <param name="args"></param> 
+        static void Main(string[] args)
     {
 
       Log.Logger = new LoggerConfiguration().WriteTo.File(_logfilePath).CreateLogger();
 
-
-            //Run();
-
-
-
              CreateCustomerMenu();
             
              //Select Customer
-            Customer currentCustomer = SqlCustomerTest();
+            Customer currentCustomer = GetCustomerFromUserPrompt();
                 
             //Select a Store
-              Store store = SqlStoreTest();
+             Store store = SqlStoreTest();
 
             MainMenu(currentCustomer, store);
-
-            
-           
-
-            
-
-
-
-          
-
 
         }
 
     /// <summary>
-    /// 
+    /// The run fucntion to start the code not yet perfectly implemented
     /// </summary>
+   
+        /*
     static void Run()
     {
+
       Log.Information("method run()");
 
       //Customers
@@ -77,24 +66,50 @@ namespace Project0.StoreApplication.Client
 
       CaptureOutput();
     }
+        */
 
      /// <summary>
      /// This method is used to print customers from the database and give the user the option to select a customer SPLITT THIS 
      /// </summary>
      /// <returns></returns>
-    static Customer SqlCustomerTest()
+    static Customer GetCustomerFromUserPrompt()
     {
-      var def = new DemoEF();
+            Log.Information("method run()");
+
+            var def = new DemoEF();
+            bool flag = false;
+            int result = 0;
       int customerid = 1;
       foreach (var item in def.GetCustomers())
       {
         Console.WriteLine(customerid + " " + item.Name);
-                customerid += 1;
+        customerid += 1;
       }
-            Console.WriteLine("Who are you?");
-
-            var option = int.Parse(Console.ReadLine());
-            var customer = def.GetCustomers()[option - 1];
+            while(flag != true)
+            {
+                Console.WriteLine("Who are you?");
+                 flag = int.TryParse(Console.ReadLine(), out result);
+                if(flag == true)
+                {
+                    if (result > 0 && result <= def.GetCustomers().Count)
+                    {
+                        Console.WriteLine("Input Valid");
+                    }
+                    else
+                    {
+                        Console.WriteLine("NUMBER NOT IN VALID RANGE");
+                        Log.Information("SOMEONE DIDNT ENTER THE RIGHT NUMBER RANGE");
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT TRY AGAIN");
+                    Log.Information("SOMEONE DIDNT ENTER A Valid data type");
+                }
+            }
+           
+            var customer = def.GetCustomers()[result - 1];
             return customer;
         }
 
@@ -102,20 +117,47 @@ namespace Project0.StoreApplication.Client
         /// This method is the start of the menu where the user is prompted with making a user or skip and log in
         /// </summary>
     static void CreateCustomerMenu()
-        { 
-            var option = 0;
-            while(option != 2 && option != 1)
+        {
+
+            Log.Information("method run()");
+            Console.WriteLine("Hello to the StoreApplication app ");
+
+            int result = 0;
+            bool flag = false;
+
+            while (flag != true)
             {
-                Console.WriteLine("Hello to the StoreApplication app ");
                 Console.WriteLine("1. Exisiting user? ");
                 Console.WriteLine("2. New User");
 
-                option = int.Parse(Console.ReadLine());
+                flag = int.TryParse(Console.ReadLine(), out result);
+
+                if (flag == true)
+                {
+                    if (result == 1 || result == 2)
+                    {
+                        Console.WriteLine("Input Valid");
+                    }
+                    else
+                    {
+                        Console.WriteLine("NUMBER NOT IN VALID RANGE");
+                        Log.Information("SOMEONE DIDNT ENTER THE RIGHT NUMBER RANGE");
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT TRY AGAIN");
+                    Log.Information("SOMEONE DIDNT ENTER A Valid data type");
+                }
             }
-            if(option == 2)
+
+            if (result == 2)
             {
                 insertCustomer();
             }
+
+
         }
 
         /// <summary>
@@ -123,6 +165,9 @@ namespace Project0.StoreApplication.Client
         /// </summary>
      static void insertCustomer()
         {
+
+            Log.Information("method run()");
+
             Console.WriteLine("Enter Name");
             String Name = (Console.ReadLine());
 
@@ -139,19 +184,48 @@ namespace Project0.StoreApplication.Client
         /// <returns></returns>
         static Store SqlStoreTest()
         {
-            var def = new DemoEF();
-            int storeID = 1;
+            Log.Information("method run()");
 
-            foreach (var item in def.GetStores())
+
+            var def = new DemoEF();
+
+
+            int result = 0;
+            bool flag = false;
+
+            while(flag != true)
             {
-                Console.WriteLine(storeID + " " + item.storeName);
-                storeID += 1;
+                int storeID = 1;
+                foreach (var item in def.GetStores())
+                {
+                    Console.WriteLine(storeID + " " + item.storeName);
+                    storeID += 1;
+                }
+                Console.WriteLine("What store do you want to shop at?");
+
+                flag = int.TryParse(Console.ReadLine(), out result);
+
+                if (flag == true)
+                {
+                    if (result > 0 && result <= def.GetStores().Count)
+                    {
+                        Console.WriteLine("Input Valid");
+                    }
+                    else
+                    {
+                        Console.WriteLine("NUMBER NOT IN VALID RANGE");
+                        Log.Information("SOMEONE DIDNT ENTER THE RIGHT NUMBER RANGE");
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT TRY AGAIN");
+                    Log.Information("SOMEONE DIDNT ENTER A Valid data type");
+                }
             }
 
-            Console.WriteLine("What store do you want to shop at?");
-
-            var option = int.Parse(Console.ReadLine());
-            var store = def.GetStores()[option - 1];
+            var store = def.GetStores()[result - 1];
             return store;
 
         }
@@ -163,20 +237,52 @@ namespace Project0.StoreApplication.Client
         /// <returns></returns>
         static Product SqlProductTest(string StoreName)
         {
-            var def = new DemoEF();
-            int ProductID = 1;
+            Log.Information("method run()");
 
-            Console.WriteLine("Avaliable Products at " + StoreName);
-            foreach (var item in def.GetProducts(StoreName))
+
+            var def = new DemoEF();
+           
+
+          
+
+            int result = 0;
+            bool flag = false;
+
+            while(flag != true)
             {
-                Console.WriteLine(ProductID + " " + item.ProductName + " " + item.Price);
-                ProductID += 1;
+                int ProductID = 1;
+                Console.WriteLine("Avaliable Products at " + StoreName);
+                foreach (var item in def.GetProducts(StoreName))
+                {
+                    Console.WriteLine(ProductID + " " + item.ProductName + " " + item.Price);
+                    ProductID += 1;
+                }
+
+                Console.WriteLine("What Product do you want to buy?");
+
+                flag = int.TryParse(Console.ReadLine(), out result);
+
+                if (flag == true)
+                {
+                    if (result > 0 && result <= def.GetProducts(StoreName).Count)
+                    {
+                        Console.WriteLine("Input Valid");
+                    }
+                    else
+                    {
+                        Console.WriteLine("NUMBER NOT IN VALID RANGE");
+                        Log.Information("SOMEONE DIDNT ENTER THE RIGHT NUMBER RANGE");
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT TRY AGAIN");
+                    Log.Information("SOMEONE DIDNT ENTER A Valid data type");
+                }
             }
 
-            Console.WriteLine("What Product do you want to buy?");
-
-            var option = int.Parse(Console.ReadLine());
-            var Product = def.GetProducts(StoreName)[option - 1];
+            var Product = def.GetProducts(StoreName)[result - 1];
             return Product;
 
         }
@@ -187,6 +293,9 @@ namespace Project0.StoreApplication.Client
         /// <param name="cust"></param>
         static void SqlCustomerOrderTest(Customer cust)
         {
+
+            Log.Information("method run()");
+
             var def = new DemoEF();
 
             Console.WriteLine("Printing Past " + cust.Name + " Orders");
@@ -202,6 +311,9 @@ namespace Project0.StoreApplication.Client
         /// <param name="store"></param>
         static void SqlStoreOrderTest(Store store)
         {
+            Log.Information("method run()");
+
+
             var def = new DemoEF();
 
             Console.WriteLine("Printing Past Orders from " + store.storeName);
@@ -228,6 +340,7 @@ namespace Project0.StoreApplication.Client
 
         }
 
+        /*
         private static void Output<T>(List<T> data) where T : class
     {
       Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
@@ -237,20 +350,21 @@ namespace Project0.StoreApplication.Client
         Console.WriteLine(type);
       }
     }
+        */
 
-    private static void CaptureOutput()
-    {
-      Output<Store>(_storeRepo.Stores);
-      Output<Customer>(_customerRepo.Customers);
-    }
-
+ 
     private static void MainMenu(Customer cust, Store store)
     {
             Console.WriteLine("\n\nWelcome " + cust.Name + " to the " + store.storeName);
 
-            var option = 0;
 
-            while(option != 999)
+            var option = 0;
+            bool flag = false;
+            
+
+         
+          
+            while (option != 999)
             {
                 Console.WriteLine("Select an action ");
                 Console.WriteLine("1. Look at your past Orders");
@@ -258,145 +372,38 @@ namespace Project0.StoreApplication.Client
                 Console.WriteLine("3. Place an Order");
                 Console.WriteLine("999. Exit");
 
-                option = int.Parse(Console.ReadLine());
-
-                if(option == 1)
+                flag = int.TryParse(Console.ReadLine(), out option);
+                
+                if(flag == true)
                 {
-                    Console.WriteLine("\n");
-                    SqlCustomerOrderTest(cust);
+                    if (option == 1)
+                    {
+                        Console.WriteLine("\n");
+                        SqlCustomerOrderTest(cust);
+                    }
+                    else if (option == 2)
+                    {
+                        Console.WriteLine("\n");
+                        SqlStoreOrderTest(store);
+                    }
+                    else if (option == 3)
+                    {
+                        Console.WriteLine("\n");
+                        Product product = SqlProductTest(store.storeName);
+                        InsertOrder(cust, store, product);
+                    }
+                    else if (option == 999)
+                    {
+                        Console.WriteLine("GoodBye");
+                    }
                 }
-                else if(option == 2)
+                else
                 {
-                    Console.WriteLine("\n");
-                    SqlStoreOrderTest(store);
-                }
-                else if(option == 3)
-                {
-                    Console.WriteLine("\n");
-                    Product product = SqlProductTest(store.storeName);
-                    InsertOrder(cust, store, product);
-                }
-                else if(option == 999)
-                {
-                    Console.WriteLine("GoodBye");
+                    Console.WriteLine("INVALID DATE");
                 }
 
-
-
+            
             }
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    static void printAllCustomers()
-    {
-      var customerRep = new CustomerRepository();
-      int customerid = 1;
-
-      foreach (var customer in customerRep.Customers)
-      {
-        Console.WriteLine(customerid + " " + customer);
-        customerid += 1;
-      }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    Customer SelectCustomer()
-    {
-      var cr = new CustomerRepository().Customers;
-
-      Console.WriteLine("Who are you?");
-
-      var option = int.Parse(Console.ReadLine());
-      var customer = cr[option - 1];
-
-      return customer;
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    static void PrintAllStoreLocations()
-    {
-
-      Log.Information("Store Output Method");
-      int storeid = 1;
-
-
-      foreach (var store in _storeRepo.Stores)
-      {
-        Console.WriteLine(storeid + " " + store);
-        storeid += 1;
-      }
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    Store selectStore()
-    {
-      Log.Information("In SelctStore Output Method");
-      var sr = _storeRepo.Stores;
-
-      Console.WriteLine("Select a Store ");
-
-      var option = int.Parse(Console.ReadLine());
-      var store = sr[option - 1];
-
-      return store;
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    void printProducts()
-    {
-      var productRepo = new ProductRepository();
-      int productID = 1;
-      foreach (var product in productRepo.Products)
-      {
-        Console.WriteLine(productID + " " + product);
-        productID += 1;
-
-      }
-    }
-    void purchaseProducts(Customer customer, Store store)
-    {
-
-      //List products 
-      var pr = new ProductRepository().Products;
-
-      //Start a new order
-      Order newOrder = new Order(customer.CustomerID, store.storeID);
-
-      Console.WriteLine("Select a product you want to buy");
-      var option = int.Parse(Console.ReadLine());
-      var product = pr[option - 1];
-
-      Console.WriteLine("You have bought " + product.ProductName + " from " + store.storeName);
-
-    }
-
-    void previewProductsPurchased(Order o)
-    {
-
-    }
-    void viewStoreOrders()
-    {
-
-    }
-    void viewCustomerOrders()
-    {
-
     }
   }
 }

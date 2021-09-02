@@ -22,6 +22,11 @@ namespace Project0.StoreApplication.Storage
             return _da.Stores.FromSqlRaw("select * from Store.Store;").ToList();
         }
 
+        public List<Order> GetOrders()
+        {
+            return _da.Orders.FromSqlRaw("Select * from Store.[Order];").ToList();
+        }
+
         public List<Order> GetCustomerOrders(Customer cust)
         {
             return _da.Orders.FromSqlRaw($"Select * from Store.[Order] where CustomerID = {cust.CustomerID};").ToList();
