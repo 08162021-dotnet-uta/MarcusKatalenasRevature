@@ -1,0 +1,51 @@
+p{
+  text-align: left;
+  text-transform: uppercase;
+  color: red;
+  border-style: solid;
+  border-top: -10px;
+  border-width: 4px;
+  border-radius: -1px;
+  
+}
+p:hover{
+  border-color: brown;
+  color:blue;
+  font-style: italic;
+}
+div{
+  border-color: blue;
+  border-style: double;
+  
+}
+span{
+  color: red;
+  border-style: ridge;
+  border-radius: 0%;
+}
+form{
+  border-top: dotted;
+}
+b{
+
+}
+
+button:hover{
+  font-style: italic;
+  font-family: "Comic Sans ms";
+  color: Red;
+  background-color: black;
+  
+}
+legend{
+  text-align: center;
+}
+
+
+#id:nth-child(3):hover{
+  font-style: italic;
+}
+
+th::before{
+  content: "Stuff is here";
+}
