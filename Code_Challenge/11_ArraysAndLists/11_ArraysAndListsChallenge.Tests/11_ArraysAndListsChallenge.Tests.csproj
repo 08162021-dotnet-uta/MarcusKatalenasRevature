@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <RootNamespace>_8_LoopsChallenge.Tests</RootNamespace>
+    <RootNamespace>_11_ArraysAndListsChallenge.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\8_Loops\8_LoopsChallenge.csproj" />
+    <ProjectReference Include="..\11_ArraysAndLists\11_ArraysAndListsChallenge.csproj" />
   </ItemGroup>
 
 </Project>
