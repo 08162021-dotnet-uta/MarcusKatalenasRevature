@@ -21,7 +21,7 @@ var newVar = 2;
 let bigIexample = 12345678n; //Bigint
 let stringExample = "This is a string Var";//String
 console.log(`The first letter in the string is => ${stringExample[0]}`); //Should log the letter T
-let boolExample = true;
+let boolExample = true; //Boolean
 boolExample = (2 > 1);
 null
 Number

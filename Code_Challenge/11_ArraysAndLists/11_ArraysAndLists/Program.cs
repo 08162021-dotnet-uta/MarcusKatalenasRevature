@@ -20,7 +20,7 @@ namespace _11_ArraysAndListsChallenge
     /// <returns></returns>
     public static double AverageOfValues(int[] array)
     {
-      return Math.Round((double)(array.Sum() / array.Length));
+      return Math.Round((double)((double)array.Sum() / array.Length));
     }
 
     /// <summary>
