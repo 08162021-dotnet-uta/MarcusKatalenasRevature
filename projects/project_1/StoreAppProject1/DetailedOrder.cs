@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace project1app.Models
+namespace StoreAppProject1
 {
     public partial class DetailedOrder
     {

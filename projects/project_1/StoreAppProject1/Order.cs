@@ -3,22 +3,23 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace project1app.Models
+namespace StoreAppProject1
 {
-    public partial class Product
+    public partial class Order
     {
-        public Product()
+        public Order()
         {
             OrderProducts = new HashSet<OrderProduct>();
         }
 
-        public Guid ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescrip { get; set; }
+        public Guid OrderId { get; set; }
+        public Guid CustomerId { get; set; }
         public Guid StoreId { get; set; }
-        public decimal Price { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal FinalPrice { get; set; }
         public bool? Active { get; set; }
 
+        public virtual Customer Customer { get; set; }
         public virtual Store Store { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
