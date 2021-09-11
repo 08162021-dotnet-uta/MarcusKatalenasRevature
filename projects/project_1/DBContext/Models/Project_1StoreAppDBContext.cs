@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+
 #nullable disable
 
-namespace StoreAppProject1
+namespace DBContext.Models
 {
     public partial class Project_1StoreAppDBContext : DbContext
     {
