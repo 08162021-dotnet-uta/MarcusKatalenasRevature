@@ -1,11 +1,10 @@
 ﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:45180",
-      "sslPort": 44367
+      "applicationUrl": "http://localhost:30884",
+      "sslPort": 44345
     }
   },
   "profiles": {
@@ -16,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "StoreWebApp": {
+    "StoreWebApiApp": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

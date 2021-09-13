@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StoreWebApp
+namespace StoreWebApi
 {
     public class Startup
     {
@@ -29,13 +29,22 @@ namespace StoreWebApp
         {
 
             services.AddControllers();
-            services.AddControllersWithViews();
+               
+            
+            services.AddDbContext<Project_1StoreAppDBContext>(options =>
+            {
+                if (!options.IsConfigured)
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("MYDB"));
+                }
+            });
+            
 
-            services.AddDbContext<Project_1StoreAppDBContext>(opt => opt.UseSqlServer("MYDB"));
-           // services.AddSwaggerGen(c =>
-           // {
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "StoreWebApp", Version = "v1" });
-          //  });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "StoreWebApi", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,12 +53,9 @@ namespace StoreWebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               // app.UseSwagger();
-              //  app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StoreWebApp v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StoreWebApi v1"));
             }
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
