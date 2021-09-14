@@ -28,10 +28,7 @@ namespace StoreWebApi
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-         //       optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Project_1StoreAppDB");
-            }
+         
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
