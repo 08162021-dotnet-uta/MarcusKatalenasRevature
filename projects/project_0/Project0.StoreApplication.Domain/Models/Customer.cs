@@ -1,35 +1,22 @@
+﻿using System;
 using System.Collections.Generic;
 
-namespace Project0.StoreApplication.Domain.Models
+#nullable disable
+
+namespace StoreWebApi
 {
-
-  /// <summary>
-  /// The customer class to hold the general information about what a customer should have
-  /// along with supporting methods
-  /// </summary>
-  public class Customer
-  {
-
-    public byte CustomerID { get; set; }
-    public string Name { get; set; }
-
-    public List<Order> Orders { get; set; }
-
-
-
-    public Customer()
+    public partial class Customer
     {
-            Orders = new List<Order>();
-    }
-    public Customer(string nameGiven)
-    {
-      Name = nameGiven;
-    }
-
-        public override string ToString()
+        public Customer()
         {
-            return $"{CustomerID} {Name} with {Orders.Count} Orders so far";
+            Orders = new HashSet<Order>();
         }
 
+        public int CustomerId { get; set; }
+        public string Fname { get; set; }
+        public string Lname { get; set; }
+        public bool? Active { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

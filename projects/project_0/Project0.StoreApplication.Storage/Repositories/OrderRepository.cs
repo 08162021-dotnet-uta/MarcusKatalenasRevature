@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Project0.StoreApplication.Domain.Interfaces;
-using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
+using StoreWebApi;
 
 namespace Project0.StoreApplication.Storage.Repositories
 {
@@ -42,8 +42,8 @@ namespace Project0.StoreApplication.Storage.Repositories
 
     public bool Insert(Order entry)
     {
-            Console.WriteLine(entry.CustomerID + " " + entry.StoreID);
-            _da.Database.ExecuteSqlRaw($"Execute dbo.SP_AddOrder @cID = '{entry.CustomerID}', @sID = '{entry.StoreID}';");
+            
+            _da.Database.ExecuteSqlRaw($"Execute dbo.SP_AddOrder @cID = '{entry.CustomerId}', @sID = '{entry.StoreId}';");
             return true;
     }
 

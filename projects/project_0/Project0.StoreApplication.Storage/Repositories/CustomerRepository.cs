@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Project0.StoreApplication.Domain.Interfaces;
-using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Adapters;
+using StoreWebApi;
 
 namespace Project0.StoreApplication.Storage.Repositories
 {
@@ -14,26 +14,18 @@ namespace Project0.StoreApplication.Storage.Repositories
 
         private readonly DataAdapter _da = new DataAdapter();
 
-       private const string _path = @"/home/marcus/revature/marcus_code/Data/customers.xml";
+      // private const string _path = @"/home/marcus/revature/marcus_code/Data/customers.xml";
 
-    private static readonly FileAdapter _fileAdapter = new FileAdapter();
+    // private static readonly FileAdapter _fileAdapter = new FileAdapter();
+     //   private readonly Project_1StoreAppDBContext
 
     /// <summary>
     /// 
     /// </summary>
     public CustomerRepository()
     {
-            /*
-      if (_fileAdapter.ReadFile<Customer>(_path) == null)
-      {
-        _fileAdapter.WriteFile<Customer>(_path, new List<Customer>(){
-
-          new Customer("Marcus"),
-          new Customer("Luke"),
-          new Customer("John")
-        });
-      }
-            */
+           
+ 
     }
 
 
@@ -49,7 +41,7 @@ namespace Project0.StoreApplication.Storage.Repositories
                 // String sqlStatment = $"Execute dbo.SP_AddCustomer @name = '{entry.Name}'";
                 // Console.WriteLine(sqlStatment);
                 // _da.Customers.FromSqlInterpolated($"Execute dbo.SP_AddCustomer @name = '{entry.Name};'");
-                _da.Database.ExecuteSqlRaw($"Execute dbo.SP_AddCustomer @name = '{entry.Name}';");
+             //   _da.Database.ExecuteSqlRaw($"Execute dbo.SP_AddCustomer @name = '{entry.Name}';");
                 return true;
             }
             catch(SqlException E)
@@ -70,8 +62,8 @@ namespace Project0.StoreApplication.Storage.Repositories
     }
     public List<Customer> Select()
     {
-      return _fileAdapter.ReadFile<Customer>(_path);
-    }
+            throw new System.NotImplementedException();
+     }
 
 
   }

@@ -1,20 +1,26 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
+#nullable disable
 
-namespace Project0.StoreApplication.Domain.Models
+namespace StoreWebApi
 {
-
- 
-  public class Store
-  {
-    public byte storeID { get; set; }
-    public string storeName { get; set; }
-    public override string ToString()
+    public partial class Store
     {
-            return storeName;
-    }
+        public Store()
+        {
+            Orders = new HashSet<Order>();
+            Products = new HashSet<Product>();
+            StoreInventories = new HashSet<StoreInventory>();
+        }
 
-  }// end of class  
+        public int StoreId { get; set; }
+        public string StoreName { get; set; }
+        public string StoreLocation { get; set; }
+        public bool? Active { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<StoreInventory> StoreInventories { get; set; }
+    }
 }

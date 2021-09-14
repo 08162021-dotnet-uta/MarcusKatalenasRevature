@@ -8,6 +8,14 @@ function getItems() {
         .catch(error => console.error('Unable to get items.', error));
 }
 
+function validateLogin() {
+    fetch(uri)
+        .then(response => response.json())
+        .then(data => _findLogin(data))
+        .catch(error => console.error('Unable to get items.', error));
+}
+validateLogin();
+
 function addItem() {
     const addFNameTextbox = document.getElementById('add-CustomerFname');
     const addLNameTextbox = document.getElementById('add-CustomerLname');

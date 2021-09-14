@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
-using Project0.StoreApplication.Domain.Models;
+using StoreWebApi;
 
 namespace Project0.StoreApplication.Storage.Adapters
 {

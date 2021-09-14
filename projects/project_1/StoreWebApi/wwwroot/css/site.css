@@ -1,7 +1,4 @@
-﻿body {
-    input [type='submit'], button, [aria-label]
-
-{
+﻿input[type='submit'], button, [aria-label] {
     cursor: pointer;
 }
 
@@ -23,5 +20,4 @@ th {
 td {
     border: 1px solid;
     padding: 5px;
-}
 }

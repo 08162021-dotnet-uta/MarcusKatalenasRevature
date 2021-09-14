@@ -1,15 +1,16 @@
 ﻿const uri = 'api/Stores';
-let Customers = [];
+let Stores = [];
 
-function getItems() {
+function getStoreItems() {
     fetch(uri)
         .then(response => response.json())
         .then(data => _displayItems(data))
         .catch(error => console.error('Unable to get items.', error));
 }
 
+
 function _displayItems(data) {
-    const tBody = document.getElementById('Customers');
+    const tBody = document.getElementById('Stores');
     tBody.innerHTML = '';
 
     _displayCount(data.length);
@@ -17,29 +18,23 @@ function _displayItems(data) {
     const button = document.createElement('button');
 
     data.forEach(item => {
- 
+
         let tr = tBody.insertRow();
 
+        let SelectButton = button.cloneNode(false);
+        SelectButton.innerText = 'Select';
+
         let td1 = tr.insertCell(0);
-        td1.appendChild(isActiveCheckbox);
+        let storeNameCode = document.createTextNode(item.storeName);
+        td1.appendChild(storeNameCode);
 
         let td2 = tr.insertCell(1);
-        let textNode = document.createTextNode(item.fname);
-        td2.appendChild(textNode);
+        let storeLocationCode = document.createTextNode(item.storeLocation);
+        td2.appendChild(storeLocationCode);
 
         let td3 = tr.insertCell(2);
-        let textNode2 = document.createTextNode(item.lname);
-        td3.appendChild(textNode2);
-
-        let td4 = tr.insertCell(3);
-        let textNode3 = document.createTextNode(item.customerId);
-        td4.appendChild(textNode3);
-
-        let td5 = tr.insertCell(4);
-        td5.appendChild(editButton);
-
-        let td6 = tr.insertCell(5);
-        td6.appendChild(deleteButton);
+        td3.appendChild(SelectButton);
     });
 
     todos = data;
+}

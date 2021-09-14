@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Project0.StoreApplication.Storage.Repositories;
 using StoreWebApi;
 
 namespace StoreWebApi.Controllers
@@ -14,6 +15,8 @@ namespace StoreWebApi.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly Project_1StoreAppDBContext _context;
+
+        private readonly CustomerRepository crepo;
 
         public CustomersController(Project_1StoreAppDBContext context)
         {
