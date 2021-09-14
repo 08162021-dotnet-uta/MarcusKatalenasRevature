@@ -22,10 +22,10 @@ namespace StoreWebApi.Controllers
 
         // GET: api/Stores
         [HttpGet]
-        public async Task<string> GetStores()
+        public async Task<ActionResult<IEnumerable<Store>>> GetStores()
         {
-            //return await _context.Stores.ToListAsync();
-            return "This is a test";
+            return await _context.Stores.ToListAsync();
+            //return "This is a test";
         }
 
         // GET: api/Stores/5
