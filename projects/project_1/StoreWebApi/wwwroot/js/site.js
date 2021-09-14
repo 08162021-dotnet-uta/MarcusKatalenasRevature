@@ -14,7 +14,10 @@ function validateLogin() {
         .then(data => _findLogin(data))
         .catch(error => console.error('Unable to get items.', error));
 }
-validateLogin();
+
+function _findLogin(data) {
+    console.log(data);
+}
 
 function addItem() {
     const addFNameTextbox = document.getElementById('add-CustomerFname');
