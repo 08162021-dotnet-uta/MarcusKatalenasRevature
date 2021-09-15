@@ -18,11 +18,13 @@ function _displayItems(data) {
     const button = document.createElement('button');
 
     data.forEach(item => {
-
+        console.log(item.storeId);
         let tr = tBody.insertRow();
 
         let SelectButton = button.cloneNode(false);
         SelectButton.innerText = 'Select';
+        SelectButton.nodeValue = item.storeId;
+       
 
         let td1 = tr.insertCell(0);
         let storeNameCode = document.createTextNode(item.storeName);

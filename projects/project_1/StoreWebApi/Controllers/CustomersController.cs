@@ -44,6 +44,21 @@ namespace StoreWebApi.Controllers
             return customer;
         }
 
+        // GET: api/Customers/5
+        [HttpGet("{firstName}/{lastName}")]
+        public async Task<ActionResult<Customer>> GetCustomerByName(string firstName, string lastName)
+        {
+            var customer = await _context.Customers.FindAsync(firstName, lastName);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
+
+
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
