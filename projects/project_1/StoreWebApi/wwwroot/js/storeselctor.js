@@ -13,7 +13,7 @@ function _displayItems(data) {
     const tBody = document.getElementById('Stores');
     tBody.innerHTML = '';
 
-    _displayCount(data.length);
+   
 
     const button = document.createElement('button');
 
