@@ -1,8 +1,8 @@
-﻿const uri = 'api/Stores';
+﻿const uri2 = 'api/Stores';
 let Stores = [];
 
 function getStoreItems() {
-    fetch(uri)
+    fetch(uri2)
         .then(response => response.json())
         .then(data => _displayItems(data))
         .catch(error => console.error('Unable to get items.', error));

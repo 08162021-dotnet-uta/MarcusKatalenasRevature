@@ -17,6 +17,7 @@ function validateLogin() {
 
 function _findLogin(data) {
     console.log(data);
+    console.log(Http.Request.data); 
 }
 
 function addItem() {
