@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace ModelsLayer.ViewModels
 {
-    class ViewModelOrderProduct
+   public class ViewModelOrderProduct
     {
+        public ViewModelOrderProduct(int orderId, int productId)
+        {
+            OrderId = orderId;
+            ProductId = productId;
+        }
+
+        public int OrderProductId { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
     }
 }

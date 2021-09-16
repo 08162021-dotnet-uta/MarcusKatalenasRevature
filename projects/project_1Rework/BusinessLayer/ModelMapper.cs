@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
+	/*
 	
    public class ModelMapper 
     {
@@ -68,7 +69,7 @@ namespace BusinessLayer
 			return c1;
 		}
 	}
-	
+	*/
 	
 	
 }
