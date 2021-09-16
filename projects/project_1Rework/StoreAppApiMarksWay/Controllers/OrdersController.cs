@@ -20,45 +20,46 @@ namespace StoreWebApi.Controllers
 
         private readonly IOrderRepo _orepo;
 
-        public OrdersController(Project_1StoreAppDBContext context)
+        public OrdersController(Project_1StoreAppDBContext context, IOrderRepo or)
         {
             _context = context;
+            _orepo = or;
         }
-        /*
+        
         [HttpGet("findOrderListSID/{storeID}")]
-        public async Task<ActionResult<ViewModelOrder>> Login(int storeID)
+        public async Task<ActionResult<ViewModelOrder>> findOrderListSID(int storeID)
         {
             //  if (!ModelState.IsValid) return BadRequest();
 
             ViewModelOrder o = new ViewModelOrder() { StoreId = storeID};
             //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
-            ViewModelOrder c1 = await _orepo.LoginCustomerAsync(c);
-            if (c1 == null)
+            List<ViewModelOrder> o1 = await _orepo.OrderListByStoreIDAsync(o);
+            if (o1 == null)
             {
                 return NotFound();
             }
 
-            return Ok(c1);
+            return Ok(o1);
         }
-        */
+        
 
-        /*
+        
         [HttpGet("findOrderListCID/{customerID}")]
-        public async Task<ActionResult<ViewModelOrder>> Login(int storeID)
+        public async Task<ActionResult<ViewModelOrder>> findOrderListCID(int customerID)
         {
             //  if (!ModelState.IsValid) return BadRequest();
 
-            ViewModelOrder o = new ViewModelOrder() { StoreId = storeID };
+            ViewModelOrder o = new ViewModelOrder() { CustomerId = customerID };
             //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
-            ViewModelOrder c1 = await _orepo.LoginCustomerAsync(c);
-            if (c1 == null)
+            List<ViewModelOrder> o1 = await _orepo.OrderListByCustomerIDAsync(o);
+            if (o1 == null)
             {
                 return NotFound();
             }
 
-            return Ok(c1);
+            return Ok(o1);
         }
-        */
+        
 
         // GET: api/Orders
         [HttpGet]

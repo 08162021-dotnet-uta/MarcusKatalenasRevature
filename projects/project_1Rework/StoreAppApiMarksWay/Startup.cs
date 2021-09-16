@@ -31,9 +31,12 @@ namespace StoreAppApiMarksWay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IOrderRepo, OrderRepo>();
             services.AddScoped<ICustomerRepo, CustomerRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StoreAppApiMarksWay", Version = "v1" });

@@ -21,8 +21,7 @@ namespace StoreWebApi.Controllers
 
         private readonly ICustomerRepo _crepo;
 
-       
-
+  
         public CustomersController(Project_1StoreAppDBContext context, ICustomerRepo cr)
         {
             _context = context;

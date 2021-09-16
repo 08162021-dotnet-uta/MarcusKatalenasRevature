@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class OrderRepo : IModelMapper<Order, ViewModelOrder>
+   public class OrderRepo : IModelMapper<Order, ViewModelOrder>, IOrderRepo
     {
         private readonly Project_1StoreAppDBContext _context;
 
@@ -24,6 +24,39 @@ namespace BusinessLayer
             return o1;
         }
 
+        public async Task<List<ViewModelOrder>> OrderListAsync()
+        {
+            List<Order> orders = await _context.Orders.FromSqlRaw<Order>("Select * FROM Store.Orders").ToListAsync();
+            List<ViewModelOrder> vmo = new List<ViewModelOrder>();
+            foreach (Order o in orders)
+            {
+                vmo.Add(EFToView(o));
+            }
+            return vmo;
+        }
+
+        public async Task<List<ViewModelOrder>> OrderListByCustomerIDAsync(ViewModelOrder vop)
+        {
+            List<Order> orders = await _context.Orders.FromSqlRaw<Order>("Select * FROM Store.Orders where CustomerId = {0}", vop.CustomerId).ToListAsync();
+            List<ViewModelOrder> vmo = new List<ViewModelOrder>();
+            foreach (Order o in orders)
+            {
+                vmo.Add(EFToView(o));
+            }
+            return vmo;
+        }
+
+        public async Task<List<ViewModelOrder>> OrderListByStoreIDAsync(ViewModelOrder vop)
+        {
+            List<Order> orders = await _context.Orders.FromSqlRaw<Order>("Select * FROM Store.Orders where StoreID = {0}", vop.StoreId).ToListAsync();
+            List<ViewModelOrder> vmo = new List<ViewModelOrder>();
+            foreach (Order o in orders)
+            {
+                vmo.Add(EFToView(o));
+            }
+            return vmo;
+        }
+
         public Order ViewToEF(ViewModelOrder view)
         {
             Order o1 = (Order)_context.Orders.FromSqlRaw<Order>("Select * from Store.Orders where OrderID = {0}", view.OrderId).FirstOrDefault();
@@ -31,3 +64,7 @@ namespace BusinessLayer
         }
     }
 }
+
+        
+    
+
