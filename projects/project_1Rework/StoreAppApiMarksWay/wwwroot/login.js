@@ -1,4 +1,5 @@
-﻿const loginform = document.querySelector(".loginform");
+﻿const loginform = document.querySelector("#loginform");
+
 
 loginform.addEventListener('submit', (e) => {
 	e.preventDefault();
@@ -6,7 +7,7 @@ loginform.addEventListener('submit', (e) => {
 	const lname = loginform.lname.value;
 
 	//GET fetch request
-	fetch(`customer/login/${fname}/${lname}`)
+	fetch(`/api/Customers/login/${firstName}/${lastName}`)
 		.then(res => {
 			if (!res.ok) {
 				console.log('unable to login the user')
@@ -21,9 +22,9 @@ loginform.addEventListener('submit', (e) => {
 			console.log(sessionStorage.getItem('user'));
 			console.log(sessionStorage.user);
 			console.log(sessionStorage['user']);
-			sessionStorage.clear()
+			//sessionStorage.clear()
 
-			location.href = "welcomeuser.html";
+			location.href = "goal.html";
 		})
 		.catch(err => console.log(`There was an error ${err}`));
 });

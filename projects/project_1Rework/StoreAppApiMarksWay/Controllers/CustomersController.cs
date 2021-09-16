@@ -13,21 +13,21 @@ using StoreWebApi;
 
 namespace StoreWebApi.Controllers
 {
-    [Route("api/Customers")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
         private readonly Project_1StoreAppDBContext _context;
 
-        private readonly CustomerRepo _crepo;
+        private readonly ICustomerRepo _crepo;
 
-        private readonly IModelMapper<Customer, ViewModelCustomer> _mm;
+       
 
-        public CustomersController(Project_1StoreAppDBContext context, CustomerRepo cr, IModelMapper<Customer, ViewModelCustomer> mm)
+        public CustomersController(Project_1StoreAppDBContext context, ICustomerRepo cr)
         {
             _context = context;
             _crepo = cr;
-            _mm = mm;
+            
         }
 
         // GET: api/Customers
@@ -55,7 +55,7 @@ namespace StoreWebApi.Controllers
         [HttpGet("login/{firstName}/{lastName}")]
         public async Task<ActionResult<ViewModelCustomer>> Login(string firstName, string lastName)
         {
-            if (!ModelState.IsValid) return BadRequest();
+          //  if (!ModelState.IsValid) return BadRequest();
 
             ViewModelCustomer c = new ViewModelCustomer() { Fname = firstName, Lname = lastName };
             //send fname and lname into a method of the business layer to check the Db fo that guy/gal;

@@ -2,7 +2,7 @@
 
 //we can call an IIFE to get a list of all the customers
 (function () {
-	fetch("customer/Customerlist")
+	fetch("/api/Customers")
 		.then(res => res.json())
 		.then(data => {
 			console.log(data)

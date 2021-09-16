@@ -1,3 +1,5 @@
+using BusinessLayer;
+using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +31,7 @@ namespace StoreAppApiMarksWay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<ICustomerRepo, CustomerRepo>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -62,6 +64,8 @@ namespace StoreAppApiMarksWay
             app.UseStatusCodePages();
 
             app.UseHttpsRedirection();
+
+            
 
             app.UseRewriter(new RewriteOptions()
                 .AddRedirect("^$", "index.html"));

@@ -11,7 +11,7 @@ namespace BusinessLayer
 {
 
 
-    public class CustomerRepo : IModelMapper<Customer, ViewModelCustomer>
+    public class CustomerRepo : IModelMapper<Customer, ViewModelCustomer> , ICustomerRepo
     {
         private readonly Project_1StoreAppDBContext _context;
 
@@ -67,8 +67,5 @@ namespace BusinessLayer
             }
             return vmc;
         }
-
     }
-
-
 }
