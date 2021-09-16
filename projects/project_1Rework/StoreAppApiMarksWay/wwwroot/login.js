@@ -7,7 +7,7 @@ loginform.addEventListener('submit', (e) => {
 	const lname = loginform.lname.value;
 
 	//GET fetch request
-	fetch(`/api/Customers/login/${firstName}/${lastName}`)
+	fetch(`/api/Customers/login/${fname}/${lname}`)
 		.then(res => {
 			if (!res.ok) {
 				console.log('unable to login the user')
