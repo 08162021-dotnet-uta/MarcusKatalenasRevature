@@ -20,9 +20,10 @@ namespace StoreWebApi.Controllers
 
         private readonly CustomerRepo _crepo;
 
-        public CustomersController(Project_1StoreAppDBContext context)
+        public CustomersController(Project_1StoreAppDBContext context, CustomerRepo cr)
         {
             _context = context;
+            _crepo = cr;
         }
 
         // GET: api/Customers
