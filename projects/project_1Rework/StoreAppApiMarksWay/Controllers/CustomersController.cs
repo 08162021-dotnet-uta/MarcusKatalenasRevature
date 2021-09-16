@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
+using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +21,13 @@ namespace StoreWebApi.Controllers
 
         private readonly CustomerRepo _crepo;
 
-        public CustomersController(Project_1StoreAppDBContext context, CustomerRepo cr)
+        private readonly IModelMapper<Customer, ViewModelCustomer> _mm;
+
+        public CustomersController(Project_1StoreAppDBContext context, CustomerRepo cr, IModelMapper<Customer, ViewModelCustomer> mm)
         {
             _context = context;
             _crepo = cr;
+            _mm = mm;
         }
 
         // GET: api/Customers
@@ -48,8 +52,8 @@ namespace StoreWebApi.Controllers
         }
 
         // GET: api/Customers/5
-        [HttpGet("{firstName}/{lastName}")]
-        public async Task<ActionResult<ViewModelCustomer>> GetCustomerByNameAsync(string firstName, string lastName)
+        [HttpGet("login/{firstName}/{lastName}")]
+        public async Task<ActionResult<ViewModelCustomer>> Login(string firstName, string lastName)
         {
             if (!ModelState.IsValid) return BadRequest();
 
