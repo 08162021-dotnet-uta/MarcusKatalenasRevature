@@ -13,6 +13,11 @@ namespace BusinessLayer
     class StoreInventoryRepo : IModelMapper<StoreInventory, ViewModelStoreInventory>
     {
         private readonly Project_1StoreAppDBContext _context;
+
+        public StoreInventoryRepo(Project_1StoreAppDBContext context)
+        {
+            _context = context;
+        }
         public ViewModelStoreInventory EFToView(StoreInventory ef)
         {
             ViewModelStoreInventory si1 = new ViewModelStoreInventory(ef.StoreId, ef.ProductId, ef.ProductRemaining);

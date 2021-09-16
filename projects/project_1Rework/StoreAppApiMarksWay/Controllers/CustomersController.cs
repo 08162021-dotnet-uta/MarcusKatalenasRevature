@@ -6,7 +6,7 @@ using BusinessLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using ModelsLayer.ViewModels;
 using StoreAppApiDbContext.Models;
 using StoreWebApi;
 
@@ -18,7 +18,7 @@ namespace StoreWebApi.Controllers
     {
         private readonly Project_1StoreAppDBContext _context;
 
-        private readonly CustomerRepo crepo;
+        private readonly CustomerRepo _crepo;
 
         public CustomersController(Project_1StoreAppDBContext context)
         {
@@ -48,9 +48,19 @@ namespace StoreWebApi.Controllers
 
         // GET: api/Customers/5
         [HttpGet("{firstName}/{lastName}")]
-        public int GetCustomerByName(string firstName, string lastName)
+        public async Task<ActionResult<ViewModelCustomer>> GetCustomerByNameAsync(string firstName, string lastName)
         {
-            return 1;
+            if (!ModelState.IsValid) return BadRequest();
+
+            ViewModelCustomer c = new ViewModelCustomer() { Fname = firstName, Lname = lastName };
+            //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
+            ViewModelCustomer c1 = await _crepo.LoginCustomerAsync(c);
+            if (c1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(c1);
         }
 
 

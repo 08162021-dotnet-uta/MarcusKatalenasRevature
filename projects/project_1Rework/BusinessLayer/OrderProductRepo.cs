@@ -13,6 +13,11 @@ namespace BusinessLayer
     class OrderProductRepo : IModelMapper<OrderProduct, ViewModelOrderProduct>
     {
         private readonly Project_1StoreAppDBContext _context;
+
+        public OrderProductRepo(Project_1StoreAppDBContext context)
+        {
+            _context = context;
+        }
         public ViewModelOrderProduct EFToView(OrderProduct ef)
         {
             ViewModelOrderProduct op1 = new ViewModelOrderProduct(ef.OrderId, ef.ProductId);

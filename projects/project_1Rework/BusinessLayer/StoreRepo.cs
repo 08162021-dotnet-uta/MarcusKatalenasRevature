@@ -13,6 +13,11 @@ namespace BusinessLayer
     class StoreRepo : IModelMapper<Store, ViewModelStore>
     {
         private readonly Project_1StoreAppDBContext _context;
+
+        public StoreRepo(Project_1StoreAppDBContext context)
+        {
+            _context = context;
+        }
         public ViewModelStore EFToView(Store ef)
         {
             ViewModelStore s1 = new ViewModelStore(ef.StoreName, ef.StoreLocation, ef.StoreId);
