@@ -9,6 +9,7 @@
     //document.getElementById("place1").innerHTML += <br>Name: ${user.fname};
 
 	const button = document.createElement('button');
+	const buttonSelector = document.querySelector('button');
 
 	(function () {
 		fetch("/api/Stores")
