@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ModelsLayer.ViewModels;
 using StoreAppApiDbContext.Models;
 using StoreWebApi;
 
@@ -16,10 +18,47 @@ namespace StoreWebApi.Controllers
     {
         private readonly Project_1StoreAppDBContext _context;
 
+        private readonly IOrderRepo _orepo;
+
         public OrdersController(Project_1StoreAppDBContext context)
         {
             _context = context;
         }
+        /*
+        [HttpGet("findOrderListSID/{storeID}")]
+        public async Task<ActionResult<ViewModelOrder>> Login(int storeID)
+        {
+            //  if (!ModelState.IsValid) return BadRequest();
+
+            ViewModelOrder o = new ViewModelOrder() { StoreId = storeID};
+            //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
+            ViewModelOrder c1 = await _orepo.LoginCustomerAsync(c);
+            if (c1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(c1);
+        }
+        */
+
+        /*
+        [HttpGet("findOrderListCID/{customerID}")]
+        public async Task<ActionResult<ViewModelOrder>> Login(int storeID)
+        {
+            //  if (!ModelState.IsValid) return BadRequest();
+
+            ViewModelOrder o = new ViewModelOrder() { StoreId = storeID };
+            //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
+            ViewModelOrder c1 = await _orepo.LoginCustomerAsync(c);
+            if (c1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(c1);
+        }
+        */
 
         // GET: api/Orders
         [HttpGet]

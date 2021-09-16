@@ -1,4 +1,5 @@
-﻿const loginform = document.querySelector("#loginform");
+﻿
+const loginform = document.querySelector("#loginform");
 
 
 loginform.addEventListener('submit', (e) => {

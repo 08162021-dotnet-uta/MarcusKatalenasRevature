@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class ProductRepo : IModelMapper<Product, ViewModelProduct>
+    public class ProductRepo : IModelMapper<Product, ViewModelProduct>, IProductRepo
     {
         private readonly Project_1StoreAppDBContext _context;
 
@@ -20,13 +20,40 @@ namespace BusinessLayer
         }
         public ViewModelProduct EFToView(Product ef)
         {
-            ViewModelProduct p1 = new ViewModelProduct(ef.ProductId, ef.ProductDescrip, ef.ProductName, ef.Price);
+            ViewModelProduct p1 = new ViewModelProduct(ef.ProductId, ef.ProductDescrip, ef.ProductName, ef.Price, ef.StoreId);
             return p1;
+        }
+        
+        //Param should not be needed here
+        public async Task<List<ViewModelProduct>> ProductListAsync(ViewModelProduct vmpP)
+        {
+            List<Product> products = await _context.Products.FromSqlRaw<Product>("Select * FROM Store.Product").ToListAsync();
+            List<ViewModelProduct> vmp = new List<ViewModelProduct>();
+            foreach (Product p in products)
+            {
+                vmp.Add(EFToView(p));
+            }
+            return vmp;
+        }
+
+
+        public async Task<List<ViewModelProduct>> ProductListByStoreIDAsync(ViewModelProduct vmpP)
+        {
+            List<Product> products = await _context.Products.FromSqlRaw<Product>("Select * from Store.Product where storeId = {0}", vmpP.StoreId).ToListAsync();
+            List<ViewModelProduct> vmp = new List<ViewModelProduct>();
+            foreach (Product p in products)
+            {
+                vmp.Add(EFToView(p));
+            }
+            return vmp;
+
+            // Product p1 = (Product)await _context.Products.FromSqlRaw<Product>("Select * from Store.Product where storeId = {0}", vmp.StoreId).ToListAsync();
+            // return p1;
         }
 
         public Product ViewToEF(ViewModelProduct view)
         {
-            Product p1 = (Product)_context.Products.FromSqlRaw<Product>("Select * from Store.Product where productName = {0}", view.ProductName).FirstOrDefault();
+            Product p1 = (Product)_context.Products.FromSqlRaw<Product>("Select * from Store.Product ").FirstOrDefault();
             return p1;
         }
     }

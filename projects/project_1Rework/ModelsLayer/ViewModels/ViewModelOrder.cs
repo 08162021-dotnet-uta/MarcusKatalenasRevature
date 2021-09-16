@@ -8,6 +8,10 @@ namespace ModelsLayer.ViewModels
 {
    public class ViewModelOrder
     {
+        public ViewModelOrder()
+        {
+        }
+
         public ViewModelOrder(int orderId, int storeId, int customerId, DateTime orderDate, decimal finalPrice)
         {
             OrderId = orderId;

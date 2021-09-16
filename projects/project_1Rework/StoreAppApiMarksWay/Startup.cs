@@ -32,6 +32,7 @@ namespace StoreAppApiMarksWay
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICustomerRepo, CustomerRepo>();
+            services.AddScoped<IProductRepo, ProductRepo>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
