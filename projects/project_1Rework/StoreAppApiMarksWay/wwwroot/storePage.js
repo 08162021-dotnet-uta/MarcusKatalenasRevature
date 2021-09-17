@@ -119,7 +119,7 @@
 					'Content-Type': 'application/json'
 				}
 			})
-			.then()
+			.then(alert("Order has been added to the database"))
         }
 		
 
