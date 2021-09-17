@@ -12,6 +12,7 @@ loginform.addEventListener('submit', (e) => {
 		.then(res => {
 			if (!res.ok) {
 				console.log('unable to login the user')
+				alert("We did not find you in the database please register if you wish to continue or enter an exisiting account")
 				throw new Error(`Network response was not ok (${res.status})`);
 			}
 			return res.json();
