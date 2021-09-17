@@ -1,4 +1,5 @@
 ﻿using ModelsLayer.ViewModels;
+using StoreAppApiDbContext.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace BusinessLayer.Interfaces
         Task<List<ViewModelOrder>> OrderListAsync();
 
         Task<ViewModelOrder> InsertOrderAsync(ViewModelOrder vop);
-        Task<List<ViewModelOrder>> OrderListByStoreIDAsync(ViewModelOrder vop);
-        Task<List<ViewModelOrder>> OrderListByCustomerIDAsync(ViewModelOrder vop);
+        Task<List<Order>> OrderListByStoreIDAsync(ViewModelOrder vop);
+        Task<List<Order>> OrderListByCustomerIDAsync(ViewModelOrder vop);
 
 
     }

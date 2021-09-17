@@ -27,11 +27,35 @@
 	
 	fetch('/api/Orders', {
 		method: 'POST',
-		body: JSON.stringify({storeId: store.storeId, customerId: user.customerId }),
+		body: JSON.stringify({ storeId: store.storeId, customerId: user.customerId }),
 		headers: {
 			'Content-Type': 'application/json'
-        }
-    })
+		}
+	})
+
+	//Get Orders from the Store
+	fetch(`/api/Orders/findOrderListSID/${store.storeId}`)
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+			const lop = document.querySelector('#OrdersFromStore')
+			for (let x = 0; x < data.length; x++) {
+				lop.innerHTML += `<p> ${data[x].orderId}  : OrderID <br> ${data[x].customerId}: CustomerID <br> ${data[x].orderDate} :DATE ORDERED <br> ${data[x].finalPrice}: FINALPRICE <br> </p>`;
+			}
+		})
+
+	//Get Orders from the Customer
+	fetch(`/api/Orders/findOrderListSID/${user.customerId}`)
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+			const lop = document.querySelector('#OrdersFromCustomer')
+			for (let x = 0; x < data.length; x++) {
+				lop.innerHTML += `<p> ${data[x].orderId} : OrderID <br> ${data[x].storeId}: StoreID <br> ${data[x].orderDate} :DATE ORDERED <br> ${data[x].finalPrice}: FINALPRICE <br> </p>`;
+			}
+		})
+
+	//Get Orders from the selected customer
 
 		
 	//GETS PRODUCTS BY THE SELECTED STORE

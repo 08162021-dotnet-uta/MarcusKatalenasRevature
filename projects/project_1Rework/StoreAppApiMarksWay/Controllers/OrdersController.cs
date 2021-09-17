@@ -34,7 +34,7 @@ namespace StoreWebApi.Controllers
 
             ViewModelOrder o = new ViewModelOrder() { StoreId = storeID};
             //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
-            List<ViewModelOrder> o1 = await _orepo.OrderListByStoreIDAsync(o);
+            List<Order> o1 = await _orepo.OrderListByStoreIDAsync(o);
             if (o1 == null)
             {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace StoreWebApi.Controllers
 
             ViewModelOrder o = new ViewModelOrder() { CustomerId = customerID };
             //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
-            List<ViewModelOrder> o1 = await _orepo.OrderListByCustomerIDAsync(o);
+            List<Order> o1 = await _orepo.OrderListByCustomerIDAsync(o);
             if (o1 == null)
             {
                 return NotFound();

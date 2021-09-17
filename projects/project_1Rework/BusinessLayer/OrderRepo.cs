@@ -47,7 +47,7 @@ namespace BusinessLayer
             return vmo;
         }
 
-        public async Task<List<ViewModelOrder>> OrderListByCustomerIDAsync(ViewModelOrder vop)
+        public async Task<List<Order>> OrderListByCustomerIDAsync(ViewModelOrder vop)
         {
             List<Order> orders = await _context.Orders.FromSqlRaw<Order>("Select * FROM Store.Orders where CustomerId = {0}", vop.CustomerId).ToListAsync();
             List<ViewModelOrder> vmo = new List<ViewModelOrder>();
@@ -55,10 +55,10 @@ namespace BusinessLayer
             {
                 vmo.Add(EFToView(o));
             }
-            return vmo;
+            return orders;
         }
 
-        public async Task<List<ViewModelOrder>> OrderListByStoreIDAsync(ViewModelOrder vop)
+        public async Task<List<Order>> OrderListByStoreIDAsync(ViewModelOrder vop)
         {
             List<Order> orders = await _context.Orders.FromSqlRaw<Order>("Select * FROM Store.Orders where StoreID = {0}", vop.StoreId).ToListAsync();
             List<ViewModelOrder> vmo = new List<ViewModelOrder>();
@@ -66,7 +66,7 @@ namespace BusinessLayer
             {
                 vmo.Add(EFToView(o));
             }
-            return vmo;
+            return orders;
         }
 
         public Order ViewToEF(ViewModelOrder view)
