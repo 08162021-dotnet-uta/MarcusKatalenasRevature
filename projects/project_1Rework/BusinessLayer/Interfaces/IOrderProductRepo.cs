@@ -8,18 +8,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Interfaces
 {
-	
-	public interface ICustomerRepo
+	public interface IOrderProductRepo
 	{
-		Task<Customer> LoginCustomerAsync(ViewModelCustomer vmc);
-		Task<Customer> RegisterCustomerAsync(ViewModelCustomer vmc);
-		Task<List<ViewModelCustomer>> CustomerListAsync();
-
+		Task<OrderProduct> InsertOrderProductAsync(ViewModelOrderProduct vmop);
+	
 	}
-	
-
-	
-	
-
 }
-  

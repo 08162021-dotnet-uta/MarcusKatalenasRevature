@@ -9,6 +9,7 @@ namespace ModelsLayer.ViewModels
 {
     public class ViewModelCustomer
     {
+		public int CustomerID { get; set; }
 		private string fname;
 
 		[StringLength(20, MinimumLength = 1)]

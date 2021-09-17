@@ -9,7 +9,8 @@
 	//document.getElementById("place1").innerHTML += <br>Name: ${user.fname};
 
 	const button = document.createElement('button');
-	
+
+	myJsonCart = '{products :[]}';
 
 	(function () {
 		fetch("/api/Stores")
@@ -33,6 +34,7 @@
 				for (let i = 0; i < buttonSelectors.length; i++) {
 					let buttonhue = buttonSelectors[i];
 					buttonhue.addEventListener('click', function () {
+
 						//GET THE STOREID VALUE FROM THE BUTOnn AND make a storedsession of the storeid
 						//Calls stores ID api get
 						fetch(`/api/Stores/${buttonhue.value}`)
@@ -42,6 +44,8 @@
 								console.log(buttonhue.value) //prints the id of the store
 
 								sessionStorage.setItem('store', JSON.stringify(res));
+
+								sessionStorage.setItem('cart', JSON.stringify(myJsonCart));
 
 								console.log(sessionStorage.store);
 

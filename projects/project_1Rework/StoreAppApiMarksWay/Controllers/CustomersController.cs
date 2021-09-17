@@ -52,13 +52,13 @@ namespace StoreWebApi.Controllers
 
         // GET: api/Customers/5
         [HttpGet("login/{firstName}/{lastName}")]
-        public async Task<ActionResult<ViewModelCustomer>> Login(string firstName, string lastName)
+        public async Task<ActionResult<Customer>> Login(string firstName, string lastName)
         {
           //  if (!ModelState.IsValid) return BadRequest();
 
             ViewModelCustomer c = new ViewModelCustomer() { Fname = firstName, Lname = lastName };
             //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
-            ViewModelCustomer c1 = await _crepo.LoginCustomerAsync(c);
+            Customer c1 = await _crepo.LoginCustomerAsync(c);
             if (c1 == null)
             {
                 return NotFound();

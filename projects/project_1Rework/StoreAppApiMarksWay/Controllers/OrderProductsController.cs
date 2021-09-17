@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,12 @@ namespace StoreWebApi.Controllers
     {
         private readonly Project_1StoreAppDBContext _context;
 
-        public OrderProductsController(Project_1StoreAppDBContext context)
+        private readonly IOrderProductRepo _oprepo;
+
+        public OrderProductsController(Project_1StoreAppDBContext context, IOrderProductRepo op)
         {
             _context = context;
+            _oprepo = op;
         }
 
         // GET: api/OrderProducts

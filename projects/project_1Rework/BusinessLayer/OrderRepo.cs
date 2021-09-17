@@ -20,8 +20,20 @@ namespace BusinessLayer
         }
         public ViewModelOrder EFToView(Order ef)
         {
-            ViewModelOrder o1 = new ViewModelOrder(ef.OrderId, ef.StoreId, ef.CustomerId, ef.OrderDate, ef.FinalPrice);
+            ViewModelOrder o1 = new ViewModelOrder();
             return o1;
+        }
+
+        public async Task<ViewModelOrder> InsertOrderAsync(ViewModelOrder vop)
+        {
+            Order o = ViewToEF(vop);
+            int response = await _context.Database.ExecuteSqlRawAsync("Insert into Store.Orders(CustomerId, StoreID, OrderDate, finalPrice) values ({0}, {1}, GETDATE(), 0.00)", vop.CustomerId, vop.StoreId);
+
+            if (response != 1) return null;
+
+            ViewModelOrder vmo1 = EFToView(o);
+
+            return vmo1;
         }
 
         public async Task<List<ViewModelOrder>> OrderListAsync()

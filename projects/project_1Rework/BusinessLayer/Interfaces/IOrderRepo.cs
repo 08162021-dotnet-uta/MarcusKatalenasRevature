@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         
         Task<List<ViewModelOrder>> OrderListAsync();
+
+        Task<ViewModelOrder> InsertOrderAsync(ViewModelOrder vop);
         Task<List<ViewModelOrder>> OrderListByStoreIDAsync(ViewModelOrder vop);
         Task<List<ViewModelOrder>> OrderListByCustomerIDAsync(ViewModelOrder vop);
 

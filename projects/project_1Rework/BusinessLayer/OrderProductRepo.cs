@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class OrderProductRepo : IModelMapper<OrderProduct, ViewModelOrderProduct>
+    public class OrderProductRepo : IModelMapper<OrderProduct, ViewModelOrderProduct>, IOrderProductRepo
     {
         private readonly Project_1StoreAppDBContext _context;
 
@@ -22,6 +22,18 @@ namespace BusinessLayer
         {
             ViewModelOrderProduct op1 = new ViewModelOrderProduct(ef.OrderId, ef.ProductId);
             return op1;
+        }
+
+        public async Task<OrderProduct> InsertOrderProductAsync(ViewModelOrderProduct vmop)
+        {
+            OrderProduct op = ViewToEF(vmop);
+            int response = await _context.Database.ExecuteSqlRawAsync("Insert into Store.OrderProduct(OrderID, ProductID) values ({0}, {1})", op.OrderId, op.ProductId);
+            Console.WriteLine(response);
+            if (response != 1) return null;
+
+            ViewModelOrderProduct vmop1 = EFToView(op);
+
+            return op;
         }
 
         public OrderProduct ViewToEF(ViewModelOrderProduct view)

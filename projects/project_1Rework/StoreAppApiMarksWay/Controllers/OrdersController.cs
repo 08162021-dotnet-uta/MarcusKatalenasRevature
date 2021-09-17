@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer;
 using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -118,7 +119,9 @@ namespace StoreWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-            _context.Orders.Add(order);
+            ViewModelOrder vom = new ViewModelOrder() { StoreId = order.StoreId, CustomerId = order.CustomerId };
+
+            await _orepo.InsertOrderAsync(vom);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);

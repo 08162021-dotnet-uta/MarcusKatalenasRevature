@@ -33,8 +33,9 @@ namespace BusinessLayer
             return c1;
         }
 
-        public async Task<ViewModelCustomer> LoginCustomerAsync(ViewModelCustomer vmc)
+        public async Task<Customer> LoginCustomerAsync(ViewModelCustomer vmc)
         {
+            
             Customer c1 = await _context.Customers.FromSqlRaw<Customer>("Select * From Customer.Customer where FName = {0} AND LName = {1}", vmc.Fname, vmc.Lname).FirstOrDefaultAsync();
             if (c1 == null)
             {
@@ -43,10 +44,10 @@ namespace BusinessLayer
 
             ViewModelCustomer vmc1 = EFToView(c1);
 
-            return vmc1;
+            return c1;
         }
 
-        public async Task<ViewModelCustomer> RegisterCustomerAsync(ViewModelCustomer vmc)
+        public async Task<Customer> RegisterCustomerAsync(ViewModelCustomer vmc)
         {
             Customer c = ViewToEF(vmc);
             int response = await _context.Database.ExecuteSqlRawAsync("INSERT into Customer.Customer(FName, LName) values ({0}, {1})", c.Fname, c.Lname);

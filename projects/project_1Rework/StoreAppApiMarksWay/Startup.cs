@@ -31,6 +31,7 @@ namespace StoreAppApiMarksWay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IOrderProductRepo, OrderProductRepo>();
             services.AddScoped<IOrderRepo, OrderRepo>();
             services.AddScoped<ICustomerRepo, CustomerRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
