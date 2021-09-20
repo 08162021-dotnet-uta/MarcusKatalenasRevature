@@ -1,24 +1,27 @@
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
+#nullable disable
 
-namespace Project0.StoreApplication.Domain.Models
+namespace StoreWebApi
 {
-
-
-    public class Product
-  {
-    public byte ProductID { get; set; }
-    public string ProductName { get; set; }
-
-    public byte StoreID { get; set; }
-   
-    public decimal Price { get; set; }
-
-    public override string ToString()
+    public partial class Product
     {
-      return ProductName + " " + "$" + Price;
+        public Product()
+        {
+            OrderProducts = new HashSet<OrderProduct>();
+            StoreInventories = new HashSet<StoreInventory>();
+        }
+
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDescrip { get; set; }
+        public int StoreId { get; set; }
+        public decimal Price { get; set; }
+        public bool? Active { get; set; }
+
+        public virtual Store Store { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<StoreInventory> StoreInventories { get; set; }
     }
-  }
 }

@@ -1,36 +1,26 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Project0.StoreApplication.Domain.Models
+#nullable disable
 
+namespace StoreWebApi
 {
-  public class Order
-  {
-
-    public byte OrderID { get; set; }
-    public byte CustomerID { get; set; }
-    public byte StoreID { get; set; }
-
-    public DateTime OrderDate { get; set; }
-   
-    [NotMapped]
-    public double finalPrice;
-    
-     public Order()
+    public partial class Order
+    {
+        public Order()
         {
-
-        }
-    public Order(byte Cid, byte sID)
-        {
-            CustomerID = Cid;
-            StoreID = sID;
+            OrderProducts = new HashSet<OrderProduct>();
         }
 
-        public override string ToString()
-        {
-            return OrderID +  " " + CustomerID + " " + StoreID + " " + OrderDate;
-        }
+        public int OrderId { get; set; }
+        public int CustomerId { get; set; }
+        public int StoreId { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal FinalPrice { get; set; }
+        public bool? Active { get; set; }
 
+        public virtual Customer Customer { get; set; }
+        public virtual Store Store { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

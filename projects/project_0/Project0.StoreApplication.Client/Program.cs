@@ -8,6 +8,15 @@ using Project0.StoreApplication.Storage.Repositories;
 using Serilog;
 
 
+/*
+C#
+Coverlet
+Serilog
+xUnit
+Entity Framework Core
+XmlSerializer
+*/
+
 /// <summary>
 /// Defines the Program Class
 /// </summary>
@@ -29,11 +38,11 @@ namespace Project0.StoreApplication.Client
         /// </summary>
         /// <param name="args"></param> 
         static void Main(string[] args)
-    {
+        {
 
-      Log.Logger = new LoggerConfiguration().WriteTo.File(_logfilePath).CreateLogger();
+             Log.Logger = new LoggerConfiguration().WriteTo.File(_logfilePath).CreateLogger();
 
-             CreateCustomerMenu();
+            CustomerMenu();
             
              //Select Customer
             Customer currentCustomer = GetCustomerFromUserPrompt();
@@ -45,36 +54,15 @@ namespace Project0.StoreApplication.Client
 
         }
 
-    /// <summary>
-    /// The run fucntion to start the code not yet perfectly implemented
-    /// </summary>
-   
-        /*
-    static void Run()
-    {
-
-      Log.Information("method run()");
-
-      //Customers
-      Output<Customer>(_customerRepo.Customers);
-      //Store
-      Output<Store>(_storeRepo.Stores);
-      //Products
-      Output<Product>(_productRepo.Products);
-
-      //Place an order
-
-      CaptureOutput();
-    }
-        */
+  
 
      /// <summary>
-     /// This method is used to print customers from the database and give the user the option to select a customer SPLITT THIS 
+     /// This method is used to print customers from the database and give the user the option to select a customer
      /// </summary>
      /// <returns></returns>
     static Customer GetCustomerFromUserPrompt()
     {
-            Log.Information("method run()");
+            Log.Information("method GetCustomerFromUserPrompt()");
 
             var def = new DemoEF();
             bool flag = false;
@@ -116,10 +104,10 @@ namespace Project0.StoreApplication.Client
         /// <summary>
         /// This method is the start of the menu where the user is prompted with making a user or skip and log in
         /// </summary>
-    static void CreateCustomerMenu()
+    static void CustomerMenu()
         {
 
-            Log.Information("method run()");
+            Log.Information("method CustomerMenu()");
             Console.WriteLine("Hello to the StoreApplication app ");
 
             int result = 0;
@@ -166,7 +154,7 @@ namespace Project0.StoreApplication.Client
      static void insertCustomer()
         {
 
-            Log.Information("method run()");
+            Log.Information("method INSER CUSTOMER");
 
             Console.WriteLine("Enter Name");
             String Name = (Console.ReadLine());
@@ -184,10 +172,12 @@ namespace Project0.StoreApplication.Client
         /// <returns></returns>
         static Store SqlStoreTest()
         {
-            Log.Information("method run()");
+            Log.Information("method SQLSTORE TEST");
 
 
             var def = new DemoEF();
+
+      
 
 
             int result = 0;
@@ -237,7 +227,7 @@ namespace Project0.StoreApplication.Client
         /// <returns></returns>
         static Product SqlProductTest(string StoreName)
         {
-            Log.Information("method run()");
+            Log.Information("method SQLPRODUCTTEST");
 
 
             var def = new DemoEF();
@@ -291,10 +281,10 @@ namespace Project0.StoreApplication.Client
         /// This method Prints out the orders made by the current customer
         /// </summary>
         /// <param name="cust"></param>
-        static void SqlCustomerOrderTest(Customer cust)
+        static void SqlPrintCustomerOrder(Customer cust)
         {
 
-            Log.Information("method run()");
+            Log.Information("method SqlCustomerOrder");
 
             var def = new DemoEF();
 
@@ -311,7 +301,7 @@ namespace Project0.StoreApplication.Client
         /// <param name="store"></param>
         static void SqlStoreOrderTest(Store store)
         {
-            Log.Information("method run()");
+            Log.Information("method SqlStoreOrderTest()");
 
 
             var def = new DemoEF();
@@ -330,6 +320,8 @@ namespace Project0.StoreApplication.Client
         /// <param name="store"></param>
         static void InsertOrder(Customer cust, Store store, Product product)
         {
+            Log.Information("method SqlStoreOrderTest()");
+
             _ = new DemoEF();
 
             Order newOrder = new Order(cust.CustomerID, store.storeID);
@@ -340,30 +332,22 @@ namespace Project0.StoreApplication.Client
 
         }
 
-        /*
-        private static void Output<T>(List<T> data) where T : class
-    {
-      Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
+   
 
-      foreach (var type in data)
-      {
-        Console.WriteLine(type);
-      }
-    }
-        */
-
- 
+    /// <summary>
+    /// The main menu of the customer gets to once a store and customer have been selected used to view orders and place orders at the selected store
+    /// </summary>
+    /// <param name="cust"></param>
+    /// <param name="store"></param>
     private static void MainMenu(Customer cust, Store store)
     {
+            Log.Information("method MainMenu()");
             Console.WriteLine("\n\nWelcome " + cust.Name + " to the " + store.storeName);
 
 
             var option = 0;
             bool flag = false;
             
-
-         
-          
             while (option != 999)
             {
                 Console.WriteLine("Select an action ");
@@ -379,7 +363,7 @@ namespace Project0.StoreApplication.Client
                     if (option == 1)
                     {
                         Console.WriteLine("\n");
-                        SqlCustomerOrderTest(cust);
+                        SqlPrintCustomerOrder(cust);
                     }
                     else if (option == 2)
                     {
@@ -404,6 +388,56 @@ namespace Project0.StoreApplication.Client
 
             
             }
+
+            /// <summary>
+            /// The run fucntion to start the code not yet perfectly implemented
+            /// </summary>
+
+            /*
+        static void Run()
+        {
+
+          Log.Information("method run()");
+
+          //Customers
+          Output<Customer>(_customerRepo.Customers);
+          //Store
+          Output<Store>(_storeRepo.Stores);
+          //Products
+          Output<Product>(_productRepo.Products);
+
+          //Place an order
+
+          CaptureOutput();
+        }
+            */
+
+            /*
+            private static void Output<T>(List<T> data) where T : class
+            {
+                Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
+
+                foreach (var type in data)
+                {
+                    Console.WriteLine(type);
+                }
+            }
+            */
+
+           
+            /*
+            private static void Output<T>(List<T> data) where T : class
+            {
+            Log.Information($"Method Output<{typeof(T)}>"); //string Inerpolation
+
+            foreach (var type in data)
+                {
+                Console.WriteLine(type);
+            }
+            }
+            */
+
+
+        }
     }
-  }
 }
